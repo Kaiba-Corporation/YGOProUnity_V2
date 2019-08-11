@@ -336,6 +336,9 @@ public static class TcpHelper
     public static List<string> deckStrings = new List<string>();
     public static void CtosMessage_JoinGame(string psw,string version)
     {
+		if (psw.Length > 19)
+			psw = psw.Substring(0, 19);
+
         deckStrings.Clear();
         Package message = new Package();
         message.Fuction = (int)CtosMessage.JoinGame;
