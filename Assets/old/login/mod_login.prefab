@@ -573,8 +573,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 198520}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 788495, y: 651078, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 445688}
@@ -761,7 +761,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191014}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -125, y: -46, z: 0}
+  m_LocalPosition: {x: -150, y: -46, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 482700}
@@ -1001,7 +1001,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: f775853fdfd14bb47934543e95c3bae3, type: 3}
   mFont: {fileID: 0}
-  mText: "\u5BC6\u7801"
+  mText: 'Password:'
   mFontSize: 20
   mFontStyle: 0
   mAlignment: 0
@@ -1340,7 +1340,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: f775853fdfd14bb47934543e95c3bae3, type: 3}
   mFont: {fileID: 0}
-  mText: "\u6CE8\u518C"
+  mText: REGISTER
   mFontSize: 20
   mFontStyle: 0
   mAlignment: 0
@@ -1406,7 +1406,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: f775853fdfd14bb47934543e95c3bae3, type: 3}
   mFont: {fileID: 0}
-  mText: "\u7528\u6237\u540D"
+  mText: 'Username:'
   mFontSize: 20
   mFontStyle: 0
   mAlignment: 0
@@ -1472,7 +1472,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: f775853fdfd14bb47934543e95c3bae3, type: 3}
   mFont: {fileID: 0}
-  mText: "\u7528\u6237\u767B\u5F55"
+  mText: LOGIN
   mFontSize: 20
   mFontStyle: 0
   mAlignment: 0
@@ -1762,7 +1762,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: f775853fdfd14bb47934543e95c3bae3, type: 3}
   mFont: {fileID: 0}
-  mText: "\u767B\u5F55"
+  mText: LOGIN
   mFontSize: 20
   mFontStyle: 0
   mAlignment: 0
@@ -1818,7 +1818,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 100
+  mWidth: 120
   mHeight: 60
   mDepth: 2
   autoResizeBoxCollider: 0
@@ -1935,7 +1935,7 @@ MonoBehaviour:
   rightAnchor:
     target: {fileID: 483014}
     relative: 1
-    absolute: -1
+    absolute: 35
   bottomAnchor:
     target: {fileID: 483014}
     relative: 0
@@ -1947,17 +1947,17 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 3
-  mWidth: 84
+  mWidth: 120
   mHeight: 34
   mDepth: 9
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.4705882
+  aspectRatio: 3.5294118
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: f775853fdfd14bb47934543e95c3bae3, type: 3}
   mFont: {fileID: 0}
-  mText: "\u8BB0\u4F4F\u5BC6\u7801"
+  mText: Remember Info
   mFontSize: 20
   mFontStyle: 0
   mAlignment: 0
@@ -2001,7 +2001,7 @@ MonoBehaviour:
   rightAnchor:
     target: {fileID: 472842}
     relative: 1
-    absolute: -5
+    absolute: 10
   bottomAnchor:
     target: {fileID: 472842}
     relative: 0
@@ -2013,17 +2013,17 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 3
-  mWidth: 85
+  mWidth: 100
   mHeight: 36
   mDepth: 9
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.3611112
+  aspectRatio: 2.7777777
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: f775853fdfd14bb47934543e95c3bae3, type: 3}
   mFont: {fileID: 0}
-  mText: "\u81EA\u52A8\u767B\u5F55"
+  mText: Auto Login
   mFontSize: 20
   mFontStyle: 0
   mAlignment: 0
@@ -2299,7 +2299,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 100
+  mWidth: 120
   mHeight: 60
   mDepth: 2
   autoResizeBoxCollider: 0
