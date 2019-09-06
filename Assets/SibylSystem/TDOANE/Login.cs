@@ -36,7 +36,7 @@ public class Login : MonoBehaviour {
             int sessionStatus = 0;
             if (rememberChk)
                 sessionStatus = 1;
-            if (PlayerPrefs.GetInt("Session_Status") == 2 && PlayerPrefs.GetString("Username") == usernameTxt.value && PlayerPrefs.GetString("SessionCode") == passwordTxt.value)
+            if (PlayerPrefs.GetInt("Session_Status") == 2 && PlayerPrefs.GetString("Saved_Username") == usernameTxt.value && PlayerPrefs.GetString("Saved_Password") == passwordTxt.value)
                 sessionStatus = 2;
 
             Program.I().tdoane.client.Send("Login<{]>" + usernameTxt.value + "<{]>" + Utils.Encrypt(passwordTxt.value) + "<{]>0<{]>0<{]>0<{]>" + sessionStatus.ToString());
