@@ -1156,6 +1156,7 @@ public class Program : MonoBehaviour
 
     void OnApplicationQuit()
     {
+        tdoane.client.Disconnect();
         TcpHelper.SaveRecord();
         cardDescription.save();
         setting.saveWhenQuit();
