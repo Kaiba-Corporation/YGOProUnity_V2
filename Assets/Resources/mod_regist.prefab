@@ -201,7 +201,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4599426977690992}
-  - component: {fileID: 114715668160685144}
   m_Layer: 8
   m_Name: mod_regist
   m_TagString: Untagged
@@ -1604,17 +1603,6 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Highlight - Shadowed
   mFillCenter: 1
---- !u!114 &114715668160685144
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1532736935995942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114785078801336920
 MonoBehaviour:
   m_ObjectHideFlags: 1

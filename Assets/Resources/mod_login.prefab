@@ -356,7 +356,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4257937991343230}
-  - component: {fileID: 114827724390331378}
+  - component: {fileID: 114409745467384570}
   m_Layer: 8
   m_Name: mod_login
   m_TagString: Untagged
@@ -1538,6 +1538,23 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
+--- !u!114 &114409745467384570
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1671835423229066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ef59c3a81c89949b52cb9f03a0e560, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  usernameTxt: {fileID: 114799543461970954}
+  passwordTxt: {fileID: 114078193136849798}
+  rememberChk: {fileID: 114005105076526960}
+  autoChk: {fileID: 114239032445331266}
+  loginBtn: {fileID: 114439616769461292}
+  registerBtn: {fileID: 114952394152808232}
 --- !u!114 &114439616769461292
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2267,17 +2284,6 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Checkmark
   mFillCenter: 1
---- !u!114 &114827724390331378
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1671835423229066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114861016670485730
 MonoBehaviour:
   m_ObjectHideFlags: 1

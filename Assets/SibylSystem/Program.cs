@@ -138,6 +138,8 @@ public class Program : MonoBehaviour
     public GameObject New_winCaculatorRecord;
     public GameObject New_ocgcore_placeSelector;
     public BGMController bgm;
+
+    public TDOANE tdoane;
     #endregion
 
     #region Initializement
@@ -454,72 +456,72 @@ public class Program : MonoBehaviour
     }
     private void UpdateClient()
     {
-        try
-        {
-            WWW w = new WWW("https://api.github.com/repos/szefo09/updateYGOPro2/contents/");
-            while (!w.isDone)
-            {
-                if (Application.internetReachability == NetworkReachability.NotReachable || !string.IsNullOrEmpty(w.error))
-                {
-                    throw new Exception("No Internet connection!");
-                }
-            }
-            List<ApiFile> toDownload = new List<ApiFile>();
-            List<ApiFile> apiFromGit = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<List<ApiFile>>(w.text);
-            if (!File.Exists("updates/SHAs.txt"))
-            {
-                Directory.CreateDirectory("updates");
-                toDownload.AddRange(apiFromGit);
-            }
+        //try
+        //{
+        //    WWW w = new WWW("https://api.github.com/repos/szefo09/updateYGOPro2/contents/");
+        //    while (!w.isDone)
+        //    {
+        //        if (Application.internetReachability == NetworkReachability.NotReachable || !string.IsNullOrEmpty(w.error))
+        //        {
+        //            throw new Exception("No Internet connection!");
+        //        }
+        //    }
+        //    List<ApiFile> toDownload = new List<ApiFile>();
+        //    List<ApiFile> apiFromGit = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<List<ApiFile>>(w.text);
+        //    if (!File.Exists("updates/SHAs.txt"))
+        //    {
+        //        Directory.CreateDirectory("updates");
+        //        toDownload.AddRange(apiFromGit);
+        //    }
 
-            if (File.Exists("updates/SHAs.txt"))
-            {
-                List<ApiFile> local = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<List<ApiFile>>(File.ReadAllText("updates/SHAs.txt"));
-                foreach (ApiFile file in apiFromGit)
-                {
-                    if (local.FirstOrDefault(x => x.name == file.name) == null || file.sha != local.FirstOrDefault(x => x.name == file.name).sha)
-                    {
-                        toDownload.Add(file);
-                    }
-                }
-                foreach (ApiFile f in local)
-                {
-                    if (apiFromGit.FirstOrDefault(x => x.name == f.name) == null || f.name != apiFromGit.FirstOrDefault(x => x.name == f.name).name)
-                    {
-                        if (File.Exists("cdb/" + f.name))
-                        {
-                            File.Delete("cdb/" + f.name);
-                        }
-                        if (File.Exists("config/" + f.name))
-                        {
-                            File.Delete("config/" + f.name);
-                        }
+        //    if (File.Exists("updates/SHAs.txt"))
+        //    {
+        //        List<ApiFile> local = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<List<ApiFile>>(File.ReadAllText("updates/SHAs.txt"));
+        //        foreach (ApiFile file in apiFromGit)
+        //        {
+        //            if (local.FirstOrDefault(x => x.name == file.name) == null || file.sha != local.FirstOrDefault(x => x.name == file.name).sha)
+        //            {
+        //                toDownload.Add(file);
+        //            }
+        //        }
+        //        foreach (ApiFile f in local)
+        //        {
+        //            if (apiFromGit.FirstOrDefault(x => x.name == f.name) == null || f.name != apiFromGit.FirstOrDefault(x => x.name == f.name).name)
+        //            {
+        //                if (File.Exists("cdb/" + f.name))
+        //                {
+        //                    File.Delete("cdb/" + f.name);
+        //                }
+        //                if (File.Exists("config/" + f.name))
+        //                {
+        //                    File.Delete("config/" + f.name);
+        //                }
 
-                    }
-                }
-            }
-            HttpDldFile httpDldFile = new HttpDldFile();
-            foreach (var dl in toDownload)
-            {
-                if (Path.GetExtension(dl.name) == ".cdb" && !(Application.internetReachability == NetworkReachability.NotReachable))
-                {
-                    httpDldFile.Download(dl.download_url, Path.Combine("cdb/", dl.name));
-                }
-                if (Path.GetExtension(dl.name) == ".conf" && !(Application.internetReachability == NetworkReachability.NotReachable))
-                {
-                    httpDldFile.Download(dl.download_url, Path.Combine("config/", dl.name));
-                }
-            }
-            File.WriteAllText("updates/SHAs.txt", w.text);
-        }
-        catch (Exception e)
-        {
-            File.Delete("updates/SHAs.txt");
-        }
-        finally
-        {
-            CanvasControl.ChangeAlpha();
-        }
+        //            }
+        //        }
+        //    }
+        //    HttpDldFile httpDldFile = new HttpDldFile();
+        //    foreach (var dl in toDownload)
+        //    {
+        //        if (Path.GetExtension(dl.name) == ".cdb" && !(Application.internetReachability == NetworkReachability.NotReachable))
+        //        {
+        //            httpDldFile.Download(dl.download_url, Path.Combine("cdb/", dl.name));
+        //        }
+        //        if (Path.GetExtension(dl.name) == ".conf" && !(Application.internetReachability == NetworkReachability.NotReachable))
+        //        {
+        //            httpDldFile.Download(dl.download_url, Path.Combine("config/", dl.name));
+        //        }
+        //    }
+        //    File.WriteAllText("updates/SHAs.txt", w.text);
+        //}
+        //catch (Exception e)
+        //{
+        //    File.Delete("updates/SHAs.txt");
+        //}
+        //finally
+        //{
+        //    CanvasControl.ChangeAlpha();
+        //}
     }
 
     public GameObject mouseParticle;
@@ -910,8 +912,8 @@ public class Program : MonoBehaviour
 
     void initializeALLservants()
     {
-        menu = new Menu();
-        servants.Add(menu);
+        //menu = new Menu();
+        //servants.Add(menu);
         setting = new Setting();
         servants.Add(setting);
         selectDeck = new selectDeck();
@@ -1128,10 +1130,15 @@ public class Program : MonoBehaviour
 
     void gameStart()
     {
+        tdoane = new TDOANE();
 
         backGroundPic.show();
         bgm = gameObject.AddComponent<BGMController>();
-        shiftToServant(menu);
+
+        tdoane.mod_login = Instantiate(Resources.Load("mod_login")) as GameObject;
+
+
+        //shiftToServant(menu);
     }
 
     public static bool Running = true;
@@ -1175,7 +1182,6 @@ public class Program : MonoBehaviour
 
     #endregion
 
-    //递归创建目录
     private static void DirPaths(string filefullpath)
     {
         if (!File.Exists(filefullpath))
