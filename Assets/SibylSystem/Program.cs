@@ -1,4 +1,4 @@
-using ICSharpCode.SharpZipLib.Core;
+﻿using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
 using System;
 using System.Collections.Generic;
@@ -520,7 +520,7 @@ public class Program : MonoBehaviour
         //}
         //finally
         //{
-        //    CanvasControl.ChangeAlpha();
+            CanvasControl.ChangeAlpha();
         //}
     }
 
@@ -1144,8 +1144,11 @@ public class Program : MonoBehaviour
 
         tdoane.loginForm = Instantiate(Resources.Load("mod_login")) as GameObject;
 
-
-        //shiftToServant(menu);
+        if (PlayerPrefs.GetInt("Remember_Info") == 1)
+        {
+            tdoane.loginForm.GetComponent<Login>().usernameTxt.value = PlayerPrefs.GetString("Saved_Username");
+            tdoane.loginForm.GetComponent<Login>().usernameTxt.value = PlayerPrefs.GetString("Saved_Password");
+        }
     }
 
     public static bool Running = true;

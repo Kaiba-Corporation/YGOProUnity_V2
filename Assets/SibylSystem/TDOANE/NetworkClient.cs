@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 using System.IO;
 using System.Net;
@@ -91,6 +91,7 @@ public class NetworkClient : MonoBehaviour {
             else if (messageArray[0] == "WrongPassword") OnWrongPassword(messageArray);
             else if (messageArray[0] == "RegisterComplete") OnRegisterComplete(messageArray);
             else if (messageArray[0] == "RegisterFail") OnRegisterFail(messageArray);
+            else if (messageArray[0] == "NewSession") OnNewSession(messageArray);
         }
     }
 
@@ -122,5 +123,11 @@ public class NetworkClient : MonoBehaviour {
         Program.I().tdoane.registerForm.SetActive(false);
         Program.I().tdoane.CreateMessageBox("REGISTRATION ERROR", "An account with that username already exists, please use a different username!", "mod_regist");
         //Program.I().EnableRegisterButton();
+    }
+
+    private void OnNewSession(string[] message)
+    {
+        PlayerPrefs.SetString("Saved_Password", message[1]);
+        PlayerPrefs.SetInt("Session_Status", 2);
     }
 }

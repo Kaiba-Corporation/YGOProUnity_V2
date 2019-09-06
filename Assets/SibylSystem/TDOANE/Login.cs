@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,7 +32,26 @@ public class Login : MonoBehaviour {
             return;
         } else {
             Program.I().tdoane.client.Connect(Program.I().tdoane.IP, Program.I().tdoane.port);
-            Program.I().tdoane.client.Send("Login<{]>" + usernameTxt.value + "<{]>" + Utils.Encrypt(passwordTxt.value) + "<{]>0<{]>0<{]>0<{]>0");
+
+            int sessionStatus = 0;
+            if (rememberChk)
+                sessionStatus = 1;
+            if (PlayerPrefs.GetInt("Session_Status") == 2 && PlayerPrefs.GetString("Username") == usernameTxt.value && PlayerPrefs.GetString("SessionCode") == passwordTxt.value)
+                sessionStatus = 2;
+
+            Program.I().tdoane.client.Send("Login<{]>" + usernameTxt.value + "<{]>" + Utils.Encrypt(passwordTxt.value) + "<{]>0<{]>0<{]>0<{]>" + sessionStatus.ToString());
+
+            if (rememberChk) {
+                PlayerPrefs.SetString("Saved_Username", usernameTxt.value);
+                PlayerPrefs.SetInt("Remember_Info", 1);
+                PlayerPrefs.Save();
+            } else {
+                PlayerPrefs.SetString("Saved_Username", "");
+                PlayerPrefs.SetString("Saved_Password", "");
+                PlayerPrefs.SetInt("Session_Status", 0);
+                PlayerPrefs.SetInt("Remember_Info", 0);
+                PlayerPrefs.Save();
+            }
         }
     }
 
