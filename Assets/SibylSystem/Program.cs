@@ -1135,7 +1135,7 @@ public class Program : MonoBehaviour
         backGroundPic.show();
         bgm = gameObject.AddComponent<BGMController>();
 
-        tdoane.mod_login = Instantiate(Resources.Load("mod_login")) as GameObject;
+        tdoane.loginForm = Instantiate(Resources.Load("mod_login")) as GameObject;
 
 
         //shiftToServant(menu);

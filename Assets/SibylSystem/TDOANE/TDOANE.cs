@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TDOANE : MonoBehaviour {
 
-    public GameObject mod_login;
-    public GameObject mod_regist;
+    public GameObject loginForm;
+    public GameObject registerForm;
     //public TCPClient client = new TCPClient();
     public bool isLoggedIn = false;
 
@@ -17,13 +17,13 @@ public class TDOANE : MonoBehaviour {
 
     public void CreateMessageBox(string title, string text, string next)
     {
-        //var message_box = (GameObject)Instantiate(Resources.Load("message_box"));
-        //message_box.GetComponent<message_box>().SetMessageBoxInformation(title, text, next);
+        var message_box = (GameObject)Instantiate(Resources.Load("message_box"));
+        message_box.GetComponent<MessageBox>().SetMessageBoxInformation(title, text, next);
     }
 
     public void ShowRegisterForm()
     {
-        mod_regist = Instantiate(Resources.Load("mod_regist")) as GameObject;
-        mod_regist.SetActive(true);
+        registerForm = Instantiate(Resources.Load("mod_regist")) as GameObject;
+        registerForm.SetActive(true);
     }
 }

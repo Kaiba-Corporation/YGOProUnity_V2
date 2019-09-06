@@ -16,6 +16,11 @@ public class MessageBox : MonoBehaviour {
 
     void onOk ()
     {
+        if (nextForm == "Login")
+            Program.I().tdoane.loginForm.SetActive(true);
+        if (nextForm == "Register")
+            Program.I().tdoane.registerForm.SetActive(true);
+
         Destroy(gameObject);
     }
 
