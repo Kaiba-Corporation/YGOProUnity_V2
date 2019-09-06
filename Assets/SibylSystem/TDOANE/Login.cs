@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,14 +25,14 @@ public class Login : MonoBehaviour {
             Program.I().tdoane.CreateMessageBox("LOGIN ERROR", "You have to enter your username and password!", "Login");
             loginBtn.enabled = true;
             return;
-        } else if (termsChk.value == false) {
+        } else if (!termsChk.value) {
             Program.I().tdoane.loginForm.SetActive(false);
             Program.I().tdoane.CreateMessageBox("LOGIN ERROR", "You have to agree to the terms of service!", "Login");
             loginBtn.enabled = true;
             return;
         } else {
             Program.I().tdoane.client.Connect(Program.I().tdoane.IP, Program.I().tdoane.port);
-            Program.I().tdoane.client.Send("Login<{]>" + usernameTxt.value + "<{]>" + passwordTxt.value + "<{]>0<{]>0<{]>0<{]>0");
+            Program.I().tdoane.client.Send("Login<{]>" + usernameTxt.value + "<{]>" + Utils.Encrypt(passwordTxt.value) + "<{]>0<{]>0<{]>0<{]>0");
         }
     }
 
