@@ -1111,6 +1111,7 @@ public class Program : MonoBehaviour
             }
         }
 
+        tdoane.Tick();
     }
 
     private void onRESIZED()

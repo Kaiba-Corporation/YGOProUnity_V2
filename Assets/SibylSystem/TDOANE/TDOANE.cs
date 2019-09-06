@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class TDOANE : MonoBehaviour {
 
+    public int version = 1;
+    public string IP = "";
+    public int port = 2081;
+
     public GameObject loginForm;
     public GameObject registerForm;
-    //public TCPClient client = new TCPClient();
+    public NetworkClient client = new NetworkClient();
     public bool isLoggedIn = false;
 
-
-    // Use this for initialization
-    void Start () {
-		
-	}
+    public void Tick()
+    {
+        client.Tick();
+    }
 
     public void CreateMessageBox(string title, string text, string next)
     {

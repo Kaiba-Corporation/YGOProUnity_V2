@@ -11,7 +11,6 @@ public class Login : MonoBehaviour {
     public UIButton loginBtn;
     public UIButton registerBtn;
 
-    // Use this for initialization
     void Start () {
         UIHelper.registEvent(gameObject, "btn_login", onLogin);
         UIHelper.registEvent(gameObject, "btn_regist", onRegister);
@@ -31,14 +30,20 @@ public class Login : MonoBehaviour {
             Program.I().tdoane.CreateMessageBox("LOGIN ERROR", "You have to agree to the terms of service!", "Login");
             loginBtn.enabled = true;
             return;
+        } else {
+            Program.I().tdoane.client.Connect(Program.I().tdoane.IP, Program.I().tdoane.port);
+            Program.I().tdoane.client.Send("Login<{]>" + usernameTxt.value + "<{]>" + passwordTxt.value + "<{]>0<{]>0<{]>0<{]>0");
         }
-        
-
     }
 
     private void onRegister()
     {
         Program.I().tdoane.loginForm.SetActive(false);
         Program.I().tdoane.ShowRegisterForm();
+    }
+
+    public void EnableLoginButton()
+    {
+        loginBtn.enabled = true;
     }
 }
