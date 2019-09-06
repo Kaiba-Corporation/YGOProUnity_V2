@@ -1,4 +1,4 @@
-﻿using ICSharpCode.SharpZipLib.Core;
+using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
 using System;
 using System.Collections.Generic;
@@ -939,6 +939,13 @@ public class Program : MonoBehaviour
         servants.Add(aiRoom);
     }
 
+    public void initializeMenu()
+    {
+        menu = new Menu();
+        servants.Add(menu);
+        shiftToServant(menu);
+    }
+
     public void shiftToServant(Servant to)
     {
         if (to != backGroundPic && backGroundPic.isShowed)
@@ -1002,7 +1009,6 @@ public class Program : MonoBehaviour
         if (to == puzzleMode && puzzleMode.isShowed == false) puzzleMode.show();
         if (to == aiRoom && aiRoom.isShowed == false) aiRoom.show();
         if (to == roomList && !roomList.isShowed) roomList.show();
-
     }
 
     #endregion

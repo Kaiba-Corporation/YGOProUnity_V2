@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.IO;
 using System.Net;
@@ -97,7 +97,7 @@ public class NetworkClient : MonoBehaviour {
     private void OnLogin(string[] message)
     {
         Program.I().tdoane.loginForm.SetActive(false);
-        //Program.I().initializeMenu();
+        Program.I().initializeMenu();
     }
 
     private void OnWrongPassword(string[] message)
