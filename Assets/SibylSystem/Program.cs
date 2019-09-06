@@ -1147,7 +1147,7 @@ public class Program : MonoBehaviour
         if (PlayerPrefs.GetInt("Remember_Info") == 1)
         {
             tdoane.loginForm.GetComponent<Login>().usernameTxt.value = PlayerPrefs.GetString("Saved_Username");
-            tdoane.loginForm.GetComponent<Login>().usernameTxt.value = PlayerPrefs.GetString("Saved_Password");
+            tdoane.loginForm.GetComponent<Login>().passwordTxt.value = PlayerPrefs.GetString("Saved_Password");
         }
     }
 
