@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,7 +26,14 @@ public class TDOANE : MonoBehaviour {
 
     public void ShowRegisterForm()
     {
-        registerForm = Instantiate(Resources.Load("mod_regist")) as GameObject;
+        if (registerForm == null)
+            registerForm = Instantiate(Resources.Load("mod_regist")) as GameObject;
+
         registerForm.SetActive(true);
+    }
+
+    public void ShowLoginForm()
+    {
+        loginForm.SetActive(true);
     }
 }

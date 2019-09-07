@@ -114,7 +114,7 @@ public class NetworkClient : MonoBehaviour {
         Disconnect();
         Program.I().tdoane.registerForm.SetActive(false);
         Program.I().tdoane.CreateMessageBox("ACCOUNT CREATED", "You have successfully created your account, you may now log in!", "mod_login");
-        //Program.I().EnableRegisterButton();
+        Program.I().tdoane.ShowLoginForm();
     }
 
     private void OnRegisterFail(string[] message)
@@ -122,12 +122,13 @@ public class NetworkClient : MonoBehaviour {
         Disconnect();
         Program.I().tdoane.registerForm.SetActive(false);
         Program.I().tdoane.CreateMessageBox("REGISTRATION ERROR", "An account with that username already exists, please use a different username!", "mod_regist");
-        //Program.I().EnableRegisterButton();
+        Program.I().tdoane.registerForm.GetComponent<Register>().EnableRegisterButton();
     }
 
     private void OnNewSession(string[] message)
     {
         PlayerPrefs.SetString("Saved_Password", message[1]);
         PlayerPrefs.SetInt("Session_Status", 2);
+        PlayerPrefs.Save();
     }
 }
