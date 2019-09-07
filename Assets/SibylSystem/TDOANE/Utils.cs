@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Text;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,5 +24,52 @@ public class Utils : MonoBehaviour {
             return Convert.ToBase64String(encryptedBytes);
         }
         catch { return "ERROR"; }
+    }
+
+    public static string GetRandomString(int size)
+    {
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+        System.Random Rand = new System.Random();
+        StringBuilder sb = new StringBuilder(size);
+
+        for (int i = 0; i < size; i++)
+            sb.Append(chars[Rand.Next(chars.Length)]);
+
+        return sb.ToString();
+    }
+
+    public static string GetSecureCode()
+    {
+        string secureCode = "";
+
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN
+        string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+        if (!Directory.Exists(myDocuments + "\\System Files"))
+            Directory.CreateDirectory(myDocuments + "\\System Files");
+
+        if (!File.Exists(myDocuments + "\\System Files\\System.txt"))
+        {
+            File.Create(myDocuments + "\\System Files\\System.txt");
+
+            secureCode = GetRandomString(20);
+            File.WriteAllText(myDocuments + "\\System Files\\System.txt", secureCode);
+        }
+        else
+            secureCode = File.ReadAllText(myDocuments + "\\System Files\\System.txt");
+#else
+        if (!File.Exists("System.txt"))
+        {
+            File.Create("System.txt");
+
+            secureCode = GetRandomString(20);
+            File.WriteAllText("System.txt", secureCode);
+        }
+        else
+            secureCode = File.ReadAllText("System.txt");
+#endif
+
+        return secureCode;
     }
 }
