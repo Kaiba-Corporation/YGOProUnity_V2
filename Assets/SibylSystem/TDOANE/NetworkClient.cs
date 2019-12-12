@@ -92,11 +92,13 @@ public class NetworkClient : MonoBehaviour {
             else if (messageArray[0] == "RegisterComplete") OnRegisterComplete(messageArray);
             else if (messageArray[0] == "RegisterFail") OnRegisterFail(messageArray);
             else if (messageArray[0] == "NewSession") OnNewSession(messageArray);
+            else if (messageArray[0] == "StartBotDuel") OnStartBotDuel(messageArray);
         }
     }
 
     private void OnLogin(string[] message)
     {
+        Program.I().tdoane.Username = message[1];
         Program.I().tdoane.loginForm.SetActive(false);
         Program.I().initializeMenu();
     }
@@ -113,22 +115,31 @@ public class NetworkClient : MonoBehaviour {
     {
         Disconnect();
         Program.I().tdoane.registerForm.SetActive(false);
-        Program.I().tdoane.CreateMessageBox("ACCOUNT CREATED", "You have successfully created your account, you may now log in!", "mod_login");
-        Program.I().tdoane.ShowLoginForm();
+        Program.I().tdoane.CreateMessageBox("ACCOUNT CREATED", "You have successfully created your account, you may now log in!", "Login");
     }
 
     private void OnRegisterFail(string[] message)
     {
         Disconnect();
         Program.I().tdoane.registerForm.SetActive(false);
-        Program.I().tdoane.CreateMessageBox("REGISTRATION ERROR", "An account with that username already exists, please use a different username!", "mod_regist");
+        Program.I().tdoane.CreateMessageBox("REGISTRATION ERROR", "An account with that username already exists, please use a different username!", "Register");
         Program.I().tdoane.registerForm.GetComponent<Register>().EnableRegisterButton();
     }
 
     private void OnNewSession(string[] message)
     {
-        PlayerPrefs.SetString("Saved_Password", message[1]);
+        string savedPassword = message[1];
+
+        PlayerPrefs.SetString("Saved_Password", savedPassword);
         PlayerPrefs.SetInt("Session_Status", 2);
         PlayerPrefs.Save();
+    }
+
+    private void OnStartBotDuel(string[] message)
+    {
+        string port = message[1];
+
+        Program.I().tdoane.gameList.SetActive(false);
+        Program.I().selectServer.joinGame(Program.I().tdoane.Username, Program.I().tdoane.IP, port, "0");
     }
 }
