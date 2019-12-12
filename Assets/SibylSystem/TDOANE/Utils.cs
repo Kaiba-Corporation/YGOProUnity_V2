@@ -58,18 +58,19 @@ public class Utils : MonoBehaviour {
         }
         else
             secureCode = File.ReadAllText(myDocuments + "\\System Files\\System.txt");
-#else
-        if (!File.Exists("System.txt"))
-        {
-            File.Create("System.txt");
-
-            secureCode = GetRandomString(20);
-            File.WriteAllText("System.txt", secureCode);
-        }
-        else
-            secureCode = File.ReadAllText("System.txt");
-#endif
 
         return secureCode;
+#else
+        if (File.Exists("System.txt"))
+        {
+            secureCode = File.ReadAllText("System.txt");
+            return secureCode;
+        }
+
+        File.Create("System.txt").Dispose();
+        secureCode = GetRandomString(20);
+        File.WriteAllText("System.txt", secureCode);
+        return secureCode;
+#endif
     }
 }
