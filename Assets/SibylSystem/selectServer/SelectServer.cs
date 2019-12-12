@@ -28,7 +28,6 @@ public class SelectServer : WindowServantSP
         serversList = UIHelper.getByName<UIPopupList>(gameObject, "server");
         serversList.fontSize = 20;
         serversList.value = Config.Get("serversPicker", "[TCG+OCG]Szefo");
-        UIHelper.registEvent(gameObject, "server", pickServer);
         UIHelper.getByName<UIInput>(gameObject, "name_").value = Config.Get("name", "YGOPro2 User");
         UIHelper.getByName<UIInput>(gameObject, "name_").defaultText = "YGOPro2 User";
         list = UIHelper.getByName<UIPopupList>(gameObject, "history_");
@@ -44,54 +43,15 @@ public class SelectServer : WindowServantSP
         set_version(currentClientVersion);
         SetActiveFalse();
     }
-    private void pickServer()
+
+    public void joinGame(string username, string ip, string port, string gameName)
     {
-        string server = serversList.value;
-        //[TCG/OCG]Szefoserver
-        //[TCG]Koishi
-        //[OCG]Mercury233
-        switch (server)
-        {
-            case "[TCG+OCG]Szefo":
-                {
-                    UIHelper.getByName<UIInput>(gameObject, "ip_").value = "szefoserver.ddns.net";
-                    UIHelper.getByName<UIInput>(gameObject, "port_").value = "7210";
-                    UIHelper.getByName<UIInput>(gameObject, "version_").value = currentClientVersion;
-                    Config.Set("serversPicker", "[TCG+OCG]Szefo");
-                    break;
-                }
-            case "[TCG]Koishi":
-                {
-                    UIHelper.getByName<UIInput>(gameObject, "ip_").value = "222.73.218.25";
-                    UIHelper.getByName<UIInput>(gameObject, "port_").value = "1311";
-                    UIHelper.getByName<UIInput>(gameObject, "version_").value = currentClientVersion;
-                    Config.Set("serversPicker", "[TCG]Koishi");
-                    break;
-                }
-            case "[OCG]Koishi":
-                {
-                    UIHelper.getByName<UIInput>(gameObject, "ip_").value = "222.73.218.25";
-                    UIHelper.getByName<UIInput>(gameObject, "port_").value = "7210";
-                    UIHelper.getByName<UIInput>(gameObject, "version_").value = currentClientVersion;
-                    Config.Set("serversPicker", "[OCG]Koishi");
-                    break;
-                }
-            case "[OCG]Mercury233":
-                {
-                    UIHelper.getByName<UIInput>(gameObject, "ip_").value = "s1.ygo233.com";
-                    UIHelper.getByName<UIInput>(gameObject, "port_").value = "23333";
-                    UIHelper.getByName<UIInput>(gameObject, "version_").value = currentClientVersion;
-                    Config.Set("serversPicker", "[OCG]Mercury233");
-                    break;
-                }
-            default:
-                {
-                    Config.Set("serversPicker", "Custom");
-                    break;
-                }
+        name = username;
+        inputIP.value = ip;
+        inputPort.value = port;
+        inputPsw.value = gameName;
 
-        }
-
+        KF_onlineGame(username, ip, port, "0x133d", gameName);
     }
 
     public void onQuickSingle()
