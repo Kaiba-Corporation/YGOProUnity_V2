@@ -10,13 +10,20 @@ public class Register : MonoBehaviour {
     public UIButton registerBtn;
     public UIButton backBtn;
 
-    void Start () {
+    void Start ()
+    {
         UIHelper.registEvent(gameObject, "btn_register", OnRegister);
         UIHelper.registEvent(gameObject, "btn_back", OnBack);
     }
 
     public void OnRegister()
     {
+        if (!Program.I().tdoane.DownloadClientInfo())
+        {
+            Program.I().tdoane.registerForm.SetActive(false);
+            return;
+        }
+
         registerBtn.enabled = false;
 
         if (usernameTxt.value.Length == 0)
@@ -51,7 +58,7 @@ public class Register : MonoBehaviour {
             return;
         }
 
-        Program.I().tdoane.client.Connect(Program.I().tdoane.IP, Program.I().tdoane.port);
+        Program.I().tdoane.client.Connect(Program.I().tdoane.IP, Program.I().tdoane.LobbyPort);
         Program.I().tdoane.client.Send("Register<{]>" + usernameTxt.value + "<{]>" + Utils.Encrypt(passwordTxt.value) + "<{]><{]><{]>" + Utils.GetSecureCode());
     }
 
