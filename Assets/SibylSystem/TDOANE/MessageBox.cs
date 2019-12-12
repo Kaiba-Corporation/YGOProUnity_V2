@@ -10,7 +10,8 @@ public class MessageBox : MonoBehaviour {
 
     string nextForm;
 
-    void Start () {
+    void Start ()
+    {
         UIHelper.registEvent(ok, onOk);
     }
 
@@ -20,6 +21,8 @@ public class MessageBox : MonoBehaviour {
             Program.I().tdoane.loginForm.SetActive(true);
         if (nextForm == "Register")
             Program.I().tdoane.registerForm.SetActive(true);
+        if (nextForm == "Close")
+            Program.I().quit();
 
         Destroy(gameObject);
     }
