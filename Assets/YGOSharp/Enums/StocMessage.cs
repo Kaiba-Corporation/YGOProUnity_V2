@@ -22,6 +22,7 @@
         HsPlayerEnter = 0x20,
         HsPlayerChange = 0x21,
         HsWatchChange = 0x22,
-        RoomList= 0x31
+        UpdateTexture = 0x30,
+        RoomList = 0x31
     }
 }

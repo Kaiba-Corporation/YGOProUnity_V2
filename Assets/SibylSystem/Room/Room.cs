@@ -168,6 +168,74 @@ public class Room : WindowServantSP
         UIHelper.Flash();
     }
 
+    public void StocMessage_UpdateTexture(BinaryReader r)
+    {
+        try
+        {
+            int type = r.ReadInt16();
+            int player = r.ReadInt16();
+            int textureId = r.ReadInt16();
+            string host = r.ReadUnicode((int)256);
+            string file = r.ReadUnicode((int)256);
+
+            File.WriteAllText("ERROR" + Utils.GetRandomString(5) + ".txt", "Type: " + type.ToString() + Environment.NewLine + "Player: " + player.ToString() + Environment.NewLine + "Texture ID: " + textureId.ToString() + Environment.NewLine + host + Environment.NewLine + file);
+
+            if (type == 0 || type == 1)
+            {
+                string urlToEncode = host + file.Substring(1);
+                if (urlToEncode == "")
+                    return;
+
+                string url = System.Web.HttpUtility.UrlEncode(urlToEncode);
+
+                using (System.Net.WebClient client = new System.Net.WebClient())
+                {
+                    DownloadImage(type, player, url);
+                    //System.Threading.Thread downloadTextureThread = new System.Threading.Thread(() => DownloadImage(type, player, url));
+                    //downloadTextureThread.Start();
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            using (StreamWriter writer = new StreamWriter("crash.txt"))
+                writer.Write(e.ToString());
+        }
+    }
+
+    public void DownloadImage(int type, int player, string url)
+    {
+        try
+        {
+            System.Net.WebClient webClient = new System.Net.WebClient();
+            byte[] imageBytes = webClient.DownloadData(@"http://ygopro.org/textures.php?type=" + type.ToString() + "&link=" + url);
+            var tex = new Texture2D(4, 4);
+            tex.LoadImage(imageBytes);
+
+            if (type == 0 && player == 0)
+            {
+                GameTextureManager.myBack = tex;
+            }
+            else if (type == 0 && player == 1)
+            {
+                GameTextureManager.opBack = tex;
+            }
+            else if (type == 1 && player == 0)
+            {
+                Program.I().ocgcore.gameInfo.SetMyFace(tex);
+            }
+            else if (type == 1 && player == 1)
+            {
+                Program.I().ocgcore.gameInfo.SetOpponentFace(tex);
+            }
+        }
+        catch (Exception e)
+        {
+            using (StreamWriter writer = new StreamWriter("crash.txt"))
+                writer.Write(e.ToString());
+        }
+    }
+
     public void StocMessage_Chat(BinaryReader r)
     {
         int player = r.ReadInt16();
@@ -281,193 +349,6 @@ public class Room : WindowServantSP
                 break;
         }
         RMSshow_none(result);
-    }
-
-    public void StocMessage_RoomList(BinaryReader r)
-    {
-        //requires a dedicated button and a list to show rooms.
-            short count = BitConverter.ToInt16(r.ReadBytes(2), 0);
-            string roomname;
-            string player1 = "";
-            string player2 = "";
-            string hoststr=String.Empty;
-            List<string[]> roomList = new List<string[]>();
-            for (ushort i = 0; i < count; i++)
-            {
-                List<char> chars = new List<char>();
-                byte[] temp = r.ReadBytes(64);
-                roomname = Encoding.UTF8.GetString(temp);
-                roomname = roomname.Trim(new char[] { '\0' });
-                int room_status = Convert.ToInt16(BitConverter.ToString(r.ReadBytes(1), 0),16);
-                int room_duel_count = Convert.ToInt16(BitConverter.ToString(r.ReadBytes(1), 0),16);
-                int room_turn_count = Convert.ToInt16(BitConverter.ToString(r.ReadBytes(1), 0), 16);
-                temp = r.ReadBytes(128);
-                player1 = Encoding.UTF8.GetString(temp);
-                player1 = player1.Trim(new char[] { '\0' });
-                int player1_score = Convert.ToInt16(BitConverter.ToString(r.ReadBytes(1), 0));
-                int player1_lp = BitConverter.ToInt32(r.ReadBytes(4), 0);
-                temp = r.ReadBytes(128);
-                player2 = Encoding.UTF8.GetString(temp);
-                player2 = player2.Trim(new char[] { '\0' });
-                int player2_score = Convert.ToInt16(BitConverter.ToString(r.ReadBytes(1), 0));
-                int player2_lp = BitConverter.ToInt32(r.ReadBytes(4), 0);
-                if (room_status == 0)
-                {
-                    player1 = player1.Replace("???", " ");
-                    player2 = player2.Replace("???", " ");
-                }
-
-            string roomTag = RoomNameFormatter(roomname);
-            string[] strings = new string[]
-            {
-                    room_duel_count.ToString(),
-                    room_turn_count.ToString(),
-                    roomname,
-                    player1_score.ToString(),
-                    player1_lp.ToString(),
-                    player1,
-                    player2,
-                    player2_score.ToString(),
-                    player2_lp.ToString(),
-                    hoststr,
-                    room_status.ToString(),
-                    roomTag
-                };
-            switch (room_status)
-            {
-                case 0:
-                    {
-                        hoststr = "[EFD334][Waiting][FFFFFF] " + strings[11] +"[FFFFFF]"+ strings[5] + " VS " + strings[6];
-                        break;
-                    }
-                case 1:
-                    {
-                        
-                        hoststr = "[A978ED][G:" + strings[0] + ",T:" + strings[1] + "][FFFFFF] " + strings[11] +"[FFFFFF]" + strings[5] + " VS " + strings[6];
-                        break;
-                    }
-                case 2:
-                    {
-                        hoststr = "[A978ED][G:" + strings[0] + ",Siding][FFFFFF] " + strings[11] + "[FFFFFF]" + strings[5] + " VS " + strings[6];
-                        break;
-                    }
-                default:
-                    {
-                        hoststr = String.Empty;
-                        break;
-                    }
-            }
-            strings[9] = hoststr;
-            roomList.Add(strings);
-        }
-        Program.I().roomList.UpdateList(roomList);
-        //Do something with the roomList.
-    }
-
-     string RoomNameFormatter(string roomname)
-    {
-        string roomTag=String.Empty;
-        List<string> tags = new List<string>();
-        if (Regex.IsMatch(roomname, @"^S,RANDOM#\d{1,}"))
-        {
-            roomTag = "[8AE57E][Duel] ";
-            return roomTag;
-        }
-        else if(Regex.IsMatch(roomname, @"^M,RANDOM#\d{1,}"))
-        {
-            roomTag = "[42C1EC][Match] ";
-            return roomTag;
-        }
-        else if(Regex.IsMatch(roomname, @"^AI#\S{0,},\d{1,}")|| Regex.IsMatch(roomname, @"^AI\S{0,}#\d{1,}"))
-        {
-            roomTag = "[5E71FF][AI] ";
-            return roomTag;
-        }
-
-        if (Regex.IsMatch(roomname, @"(\w{1,}[,^]{1}NF[,#])?(?(1)|(^NF[#,]))"))
-        {
-            tags.Add("[C63111][No Banlist] ");
-        }
-        if (Regex.IsMatch(roomname, @"(\w{1,}[,^]{1}LF\d[,#])?(?(1)|(^LF\d[#,]))"))
-        {
-            int banlist = (int)char.GetNumericValue(roomname[roomname.LastIndexOf("LF") + 2]);
-            YGOSharp.Banlist blist = YGOSharp.BanlistManager.Banlists[banlist - 1];
-            tags.Add("[DDDDAA][" + blist.Name + "]");
-        }
-        if (Regex.IsMatch(roomname, @"(\w{1,}[,^]{1}OO[,#])?(?(1)|(^OO[#,]))"))
-        {
-            if (Regex.IsMatch(roomname, @"(\w{1,}[,^]{1}OT[,#])?(?(1)|(^OT[#,]))"))
-            {
-                tags.Add("[11C69C][TCG/OCG]");
-            }
-            else
-            {
-                tags.Add("[B62FB2][OCG]");
-            }
-            if (Regex.IsMatch(roomname, @"(\w{1,}[,^]{1}S[,#])?(?(1)|(^S[#,]))"))
-            {
-                tags.Add("[8AE57E][Duel] ");
-            }
-            else if (Regex.IsMatch(roomname, @"(\w{1,}[,^]{1}M[,#])?(?(1)|(^M[#,]))"))
-            {
-                tags.Add("[42C1EC][Match] ");
-            }
-            else if (Regex.IsMatch(roomname, @"(\w{1,}[,^]{1}T[,#])?(?(1)|(^T[#,]))"))
-            {
-                tags.Add("[D14291][TAG] ");
-
-            }
-        }
-        else if (Regex.IsMatch(roomname, @"(\w{1,}[,^]{1}TO[,#])?(?(1)|(^TO[#,]))"))
-        {
-            if (Regex.IsMatch(roomname, @"(\w{1,}[,^]{1}OT[,#])?(?(1)|(^OT[#,]))"))
-            {
-                tags.Add("[11C69C][TCG/OCG]");
-
-            }
-            else
-            {
-                tags.Add("[F58637][TCG]");
-            }
-            if (Regex.IsMatch(roomname, @"(\w{1,}[,^]{1}S[,#])?(?(1)|(^S[#,]))"))
-            {
-                tags.Add("[8AE57E][Duel] ");
-            }
-            else if (Regex.IsMatch(roomname, @"(\w{1,}[,^]{1}M[,#])?(?(1)|(^M[#,]))"))
-            {
-                tags.Add("[42C1EC][Match] ");
-            }
-            else if (Regex.IsMatch(roomname, @"(\w{1,}[,^]{1}T[,#])?(?(1)|(^T[#,]))"))
-            {
-                tags.Add("[D14291][TAG] ");
-
-            }
-        }
-        else
-        {
-            if (Regex.IsMatch(roomname, @"(\w{1,}[,^]{1}T[,#])?(?(1)|(^T[#,]))"))
-            {
-                tags.Add("[D14291][TAG]");
-            }
-            if (Regex.IsMatch(roomname, @"(\w{1,}[,^]{1}M[,#])?(?(1)|(^M[#,]))"))
-            {
-                tags.Add("[42C1EC][Match]");
-            }
-            if (Regex.IsMatch(roomname, @"(\w{1,}[,^]{1}S[,#])?(?(1)|(^S[#,]))")){
-                tags.Add("[8AE57E][Duel]");
-            }
-        }
-
-        roomTag = String.Join("", tags.ToArray())+" ";
-        if (roomTag == " ")
-        {
-            roomTag ="[ "+roomname+" ] ";
-        }
-        if (roomTag.Length > 150)
-        {
-            roomTag = "[CUSTOM] ";
-        }
-        return roomTag;
     }
 
     public void StocMessage_Replay(BinaryReader r)
@@ -782,6 +663,7 @@ public class Room : WindowServantSP
                     Program.I().ocgcore.name_1 = roomPlayers[0].name;
                     Program.I().ocgcore.name_0_tag = "---";
                     Program.I().ocgcore.name_1_tag = "---";
+                    Program.I().ocgcore.gameInfo.SwapFaces();
                 }
                 else
                 {
