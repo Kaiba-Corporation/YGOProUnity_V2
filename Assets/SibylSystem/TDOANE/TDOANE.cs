@@ -89,4 +89,13 @@ public class TDOANE : MonoBehaviour {
     {
         loginForm.SetActive(true);
     }
+
+    public void ShowGameList()
+    {
+        Program.I().tdoane.client.Send("GetRooms<{]>0");
+        if (gameList == null)
+            gameList = Instantiate(Resources.Load("mod_room_list")) as GameObject;
+
+        gameList.SetActive(true);
+    }
 }

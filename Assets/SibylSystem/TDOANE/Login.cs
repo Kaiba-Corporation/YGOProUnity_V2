@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using System.IO;
-using System;
-
 public class Login : MonoBehaviour {
 
     public UIInput usernameTxt;

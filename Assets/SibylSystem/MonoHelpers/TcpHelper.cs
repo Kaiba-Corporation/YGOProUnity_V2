@@ -15,7 +15,6 @@ public static class TcpHelper
     static  NetworkStream networkStream = null;
 
     static bool canjoin = true;
-    static bool roomListChecking=false;
 
     public static void join(string ipString, string name, string portString, string pswString, string version)
     {
@@ -26,23 +25,18 @@ public static class TcpHelper
                 canjoin = false;
                 try
                 {
+                    File.WriteAllText("log.txt", "IP: " + ipString + Environment.NewLine + "Name: " + name + Environment.NewLine + "Port: " + portString + Environment.NewLine + "Game Name: " + pswString + Environment.NewLine + "Version: " + version);
+                    Thread.Sleep(1000);
                     tcpClient = new TcpClientWithTimeout(ipString, int.Parse(portString), 3000).Connect();
                     networkStream = tcpClient.GetStream();
                     Thread t = new Thread(receiver);
                     t.Start();
                     CtosMessage_PlayerInfo(name);
-                    if (pswString == "L")
-                    {
-                        roomListChecking = true;
-                    }
-                    else
-                    { 
-                        roomListChecking = false;
-                    }
                     CtosMessage_JoinGame(pswString, version);
                 }
-                catch
+                catch (Exception ex)
                 {
+                    File.WriteAllText("error.txt", ex.ToString());
                     Program.DEBUGLOG("onDisConnected 10");
                 }
                 canjoin = true;
@@ -172,8 +166,8 @@ public static class TcpHelper
                             case StocMessage.HsWatchChange:
                                 Program.I().room.StocMessage_HsWatchChange(r);
                                 break;
-                            case YGOSharp.Network.Enums.StocMessage.RoomList:
-                                ((Room)Program.I().room).StocMessage_RoomList(r);
+                            case StocMessage.UpdateTexture:
+                                Program.I().room.StocMessage_UpdateTexture(r);
                                 break;
                             default:
                                 break;
@@ -213,11 +207,7 @@ public static class TcpHelper
                 {
                     Program.I().shiftToServant(Program.I().selectServer);
                 }
-                if (!roomListChecking)
-                {
-                    Program.I().cardDescription.RMSshow_none(InterString.Get("链接被断开。"));
-                    
-                }
+                Program.I().cardDescription.RMSshow_none(InterString.Get("链接被断开。"));
             }
             else
             {
@@ -342,7 +332,7 @@ public static class TcpHelper
         deckStrings.Clear();
         Package message = new Package();
         message.Fuction = (int)CtosMessage.JoinGame;
-        //Config.ClientVersion = (uint)GameStringManager.helper_stringToInt(version);
+        Config.ClientVersion = (uint)GameStringManager.helper_stringToInt(version);
         message.Data.writer.Write((Int16)Config.ClientVersion);
         message.Data.writer.Write((byte)204);
         message.Data.writer.Write((byte)204);

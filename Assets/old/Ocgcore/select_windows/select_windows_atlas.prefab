@@ -70,7 +70,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: button_down
     x: 386
-    y: 238
+    y: 203
     width: 64
     height: 23
     borderLeft: 15
@@ -96,7 +96,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: button_up
     x: 386
-    y: 214
+    y: 179
     width: 64
     height: 23
     borderLeft: 15
@@ -238,12 +238,12 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: xiaobtn
-    x: 1508
-    y: 689
-    width: 101
+    x: 386
+    y: 227
+    width: 61
     height: 34
-    borderLeft: 20
-    borderRight: 20
+    borderLeft: 0
+    borderRight: 0
     borderTop: 0
     borderBottom: 0
     paddingLeft: 0

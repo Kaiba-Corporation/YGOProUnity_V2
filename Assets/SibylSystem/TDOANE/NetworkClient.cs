@@ -93,6 +93,7 @@ public class NetworkClient : MonoBehaviour {
             else if (messageArray[0] == "RegisterFail") OnRegisterFail(messageArray);
             else if (messageArray[0] == "NewSession") OnNewSession(messageArray);
             else if (messageArray[0] == "StartBotDuel") OnStartBotDuel(messageArray);
+            else if (messageArray[0] == "Rooms") OnRooms(messageArray);
         }
     }
 
@@ -141,5 +142,11 @@ public class NetworkClient : MonoBehaviour {
 
         Program.I().tdoane.gameList.SetActive(false);
         Program.I().selectServer.joinGame(Program.I().tdoane.Username, Program.I().tdoane.IP, port, "0");
+    }
+
+    private void OnRooms(string[] message)
+    {
+        string[] rooms = Regex.Split(message[1], ";");
+        Program.I().tdoane.gameList.GetComponent<GameList>().UpdateRoomList(rooms);
     }
 }

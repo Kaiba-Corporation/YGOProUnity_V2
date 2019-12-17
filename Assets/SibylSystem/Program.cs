@@ -978,6 +978,7 @@ public class Program : MonoBehaviour
         }
         if (to != selectServer && selectServer.isShowed)
         {
+            Program.I().tdoane.gameList.SetActive(false);
             selectServer.hide();
         }
         if (to != selectReplay && selectReplay.isShowed)
@@ -1004,11 +1005,13 @@ public class Program : MonoBehaviour
         if (to == room && room.isShowed == false) room.show();
         if (to == deckManager && deckManager.isShowed == false) deckManager.show();
         if (to == ocgcore && ocgcore.isShowed == false) ocgcore.show();
-        if (to == selectServer && selectServer.isShowed == false) selectServer.show();
         if (to == selectReplay && selectReplay.isShowed == false) selectReplay.show();
         if (to == puzzleMode && puzzleMode.isShowed == false) puzzleMode.show();
         if (to == aiRoom && aiRoom.isShowed == false) aiRoom.show();
         if (to == roomList && !roomList.isShowed) roomList.show();
+
+        if (to == selectServer && selectServer.isShowed == false)
+           Program.I().tdoane.gameList.SetActive(true);
     }
 
     #endregion

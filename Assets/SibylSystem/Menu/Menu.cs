@@ -103,7 +103,9 @@ public class Menu : WindowServantSP
 
     void onClickOnline()
     {
-        Program.I().shiftToServant(Program.I().selectServer);
+        Program.I().menu.hide();
+        Program.I().tdoane.ShowGameList();
+        //Program.I().shiftToServant(Program.I().selectServer);
     }
 
     void onClickAI()
