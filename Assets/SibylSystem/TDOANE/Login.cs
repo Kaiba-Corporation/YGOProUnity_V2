@@ -19,14 +19,25 @@ public class Login : MonoBehaviour {
 
     private void onLogin()
     {
+        loginBtn.enabled = false;
+
         if (!Program.I().tdoane.DownloadClientInfo())
         {
             Program.I().tdoane.loginForm.SetActive(false);
             return;
         }
 
-        loginBtn.enabled = false;
+        UserLogin();
+    }
 
+    private void onRegister()
+    {
+        Program.I().tdoane.loginForm.SetActive(false);
+        Program.I().tdoane.ShowRegisterForm();
+    }
+
+    public void UserLogin()
+    {
         if (usernameTxt.value.Length == 0 || passwordTxt.value.Length == 0)
         {
             Program.I().tdoane.loginForm.SetActive(false);
@@ -68,12 +79,6 @@ public class Login : MonoBehaviour {
                 PlayerPrefs.Save();
             }
         }
-    }
-
-    private void onRegister()
-    {
-        Program.I().tdoane.loginForm.SetActive(false);
-        Program.I().tdoane.ShowRegisterForm();
     }
 
     public void EnableLoginButton()

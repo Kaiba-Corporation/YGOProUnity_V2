@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.Collections;
@@ -21,7 +21,10 @@ public class TDOANE : MonoBehaviour {
     public GameObject loginForm;
     public GameObject registerForm;
     public GameObject gameList;
+    public GameObject updateBox;
+
     public NetworkClient client = new NetworkClient();
+
     public bool isLoggedIn = false;
 
     public void Tick()
@@ -59,7 +62,9 @@ public class TDOANE : MonoBehaviour {
 
             if (MinorVersion != minorVersion)
             {
-                //Download Update
+                DownloadUpdates(MinorVersion, minorVersion);
+                loginForm.SetActive(false);
+                return false;
             }
 
             return true;
@@ -97,5 +102,11 @@ public class TDOANE : MonoBehaviour {
             gameList = Instantiate(Resources.Load("mod_room_list")) as GameObject;
 
         gameList.SetActive(true);
+    }
+
+    public void DownloadUpdates(int myVersion, int requiredVersion)
+    {
+        updateBox = (GameObject)Instantiate(Resources.Load("update_box"));
+        updateBox.GetComponent<Updater>().InitializeUpdater(myVersion, requiredVersion);
     }
 }

@@ -408,9 +408,10 @@ public class Program : MonoBehaviour
         });
 
     }
+
     public void ExtractZipFile(byte[] data, string outFolder)
     {
-
+        ZipConstants.DefaultCodePage = 0;
         ZipFile zf = null;
         try
         {
@@ -418,11 +419,13 @@ public class Program : MonoBehaviour
             using (MemoryStream mstrm = new MemoryStream(data))
             {
                 zf = new ZipFile(mstrm);
+                tdoane.updateBox.GetComponent<Updater>().totalFilesToExtract = zf.Count;
 
                 foreach (ZipEntry zipEntry in zf)
                 {
                     if (!zipEntry.IsFile)
                     {
+                        tdoane.updateBox.GetComponent<Updater>().filesExtracted++;
                         continue;
                     }
 
@@ -438,12 +441,17 @@ public class Program : MonoBehaviour
                     {
                         StreamUtils.Copy(zipStream, streamWriter, buffer);
                     }
+
+                    tdoane.updateBox.GetComponent<Updater>().filesExtracted++;
                 }
             }
+
+            tdoane.updateBox.GetComponent<Updater>().myVersion++;
         }
         catch (Exception ex)
         {
-            Debug.Log(ex);
+            File.WriteAllText("ERROR.txt", ex.ToString());
+            tdoane.updateBox.GetComponent<Updater>().updateError = "Error Installing Update!" + Environment.NewLine + Environment.NewLine + "Please redownload the game from YGOPRO.ORG";
         }
         finally
         {
@@ -454,74 +462,10 @@ public class Program : MonoBehaviour
             }
         }
     }
+
     private void UpdateClient()
     {
-        //try
-        //{
-        //    WWW w = new WWW("https://api.github.com/repos/szefo09/updateYGOPro2/contents/");
-        //    while (!w.isDone)
-        //    {
-        //        if (Application.internetReachability == NetworkReachability.NotReachable || !string.IsNullOrEmpty(w.error))
-        //        {
-        //            throw new Exception("No Internet connection!");
-        //        }
-        //    }
-        //    List<ApiFile> toDownload = new List<ApiFile>();
-        //    List<ApiFile> apiFromGit = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<List<ApiFile>>(w.text);
-        //    if (!File.Exists("updates/SHAs.txt"))
-        //    {
-        //        Directory.CreateDirectory("updates");
-        //        toDownload.AddRange(apiFromGit);
-        //    }
-
-        //    if (File.Exists("updates/SHAs.txt"))
-        //    {
-        //        List<ApiFile> local = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<List<ApiFile>>(File.ReadAllText("updates/SHAs.txt"));
-        //        foreach (ApiFile file in apiFromGit)
-        //        {
-        //            if (local.FirstOrDefault(x => x.name == file.name) == null || file.sha != local.FirstOrDefault(x => x.name == file.name).sha)
-        //            {
-        //                toDownload.Add(file);
-        //            }
-        //        }
-        //        foreach (ApiFile f in local)
-        //        {
-        //            if (apiFromGit.FirstOrDefault(x => x.name == f.name) == null || f.name != apiFromGit.FirstOrDefault(x => x.name == f.name).name)
-        //            {
-        //                if (File.Exists("cdb/" + f.name))
-        //                {
-        //                    File.Delete("cdb/" + f.name);
-        //                }
-        //                if (File.Exists("config/" + f.name))
-        //                {
-        //                    File.Delete("config/" + f.name);
-        //                }
-
-        //            }
-        //        }
-        //    }
-        //    HttpDldFile httpDldFile = new HttpDldFile();
-        //    foreach (var dl in toDownload)
-        //    {
-        //        if (Path.GetExtension(dl.name) == ".cdb" && !(Application.internetReachability == NetworkReachability.NotReachable))
-        //        {
-        //            httpDldFile.Download(dl.download_url, Path.Combine("cdb/", dl.name));
-        //        }
-        //        if (Path.GetExtension(dl.name) == ".conf" && !(Application.internetReachability == NetworkReachability.NotReachable))
-        //        {
-        //            httpDldFile.Download(dl.download_url, Path.Combine("config/", dl.name));
-        //        }
-        //    }
-        //    File.WriteAllText("updates/SHAs.txt", w.text);
-        //}
-        //catch (Exception e)
-        //{
-        //    File.Delete("updates/SHAs.txt");
-        //}
-        //finally
-        //{
-            CanvasControl.ChangeAlpha();
-        //}
+        CanvasControl.ChangeAlpha();
     }
 
     public GameObject mouseParticle;
