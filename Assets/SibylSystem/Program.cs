@@ -295,7 +295,7 @@ public class Program : MonoBehaviour
             var www = new WWW(filePath);
             while (!www.isDone) { }
             byte[] bytes = www.bytes;
-            ExtractZipFile(bytes, sdcardpath);
+            ExtractZipFile(bytes, sdcardpath, false);
             DirPaths(Path.Combine(sdcardpath,"ygocore/cdb/"));
             DirPaths(Path.Combine(sdcardpath,"ygocore/config/"));
             DirPaths(Path.Combine(sdcardpath,"ygocore/deck/"));
@@ -323,7 +323,7 @@ public class Program : MonoBehaviour
             if (!Directory.Exists(Application.persistentDataPath + "/ygocore/texture")||!File.Exists(Application.persistentDataPath + "/ygocore/picture/null.png"))
             {
                 string filePath = Application.streamingAssetsPath + "/ygocore.zip";
-                ExtractZipFile(System.IO.File.ReadAllBytes(filePath), Application.persistentDataPath + "/");
+                ExtractZipFile(System.IO.File.ReadAllBytes(filePath), Application.persistentDataPath + "/", false);
             }
             Environment.CurrentDirectory = Application.persistentDataPath + "/ygocore";
             System.IO.Directory.SetCurrentDirectory(Application.persistentDataPath + "/ygocore");
@@ -409,7 +409,7 @@ public class Program : MonoBehaviour
 
     }
 
-    public void ExtractZipFile(byte[] data, string outFolder)
+    public void ExtractZipFile(byte[] data, string outFolder, bool update)
     {
         ZipConstants.DefaultCodePage = 0;
         ZipFile zf = null;
@@ -419,13 +419,17 @@ public class Program : MonoBehaviour
             using (MemoryStream mstrm = new MemoryStream(data))
             {
                 zf = new ZipFile(mstrm);
-                tdoane.updateBox.GetComponent<Updater>().totalFilesToExtract = zf.Count;
+
+                if (update)
+                    tdoane.updateBox.GetComponent<Updater>().totalFilesToExtract = zf.Count;
 
                 foreach (ZipEntry zipEntry in zf)
                 {
                     if (!zipEntry.IsFile)
                     {
-                        tdoane.updateBox.GetComponent<Updater>().filesExtracted++;
+                        if (update)
+                            tdoane.updateBox.GetComponent<Updater>().filesExtracted++;
+
                         continue;
                     }
 
@@ -442,16 +446,18 @@ public class Program : MonoBehaviour
                         StreamUtils.Copy(zipStream, streamWriter, buffer);
                     }
 
-                    tdoane.updateBox.GetComponent<Updater>().filesExtracted++;
+                    if (update)
+                        tdoane.updateBox.GetComponent<Updater>().filesExtracted++;
                 }
             }
 
-            tdoane.updateBox.GetComponent<Updater>().myVersion++;
+            if (update)
+                tdoane.updateBox.GetComponent<Updater>().myVersion++;
         }
-        catch (Exception ex)
+        catch
         {
-            File.WriteAllText("ERROR.txt", ex.ToString());
-            tdoane.updateBox.GetComponent<Updater>().updateError = "Error Installing Update!" + Environment.NewLine + Environment.NewLine + "Please redownload the game from YGOPRO.ORG";
+            if (update)
+                tdoane.updateBox.GetComponent<Updater>().updateError = "Error Installing Update!" + Environment.NewLine + Environment.NewLine + "Please redownload the game from YGOPRO.ORG";
         }
         finally
         {

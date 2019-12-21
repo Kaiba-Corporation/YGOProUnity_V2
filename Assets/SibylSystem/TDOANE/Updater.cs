@@ -101,8 +101,8 @@ public class Updater : MonoBehaviour {
 
     private void Completed(object sender, DownloadDataCompletedEventArgs e)
     {
-        Program.I().ExtractZipFile(e.Result, "");
-        File.WriteAllText("Version.conf", myVersion.ToString());
+        Program.I().ExtractZipFile(e.Result, "", true);
+        File.WriteAllText("version.conf", myVersion.ToString());
         CheckForUpdates();
     }
 }
