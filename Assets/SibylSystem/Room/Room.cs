@@ -172,13 +172,11 @@ public class Room : WindowServantSP
     {
         try
         {
-            int type = r.ReadInt16();
-            int player = r.ReadInt16();
-            int textureId = r.ReadInt16();
-            string host = r.ReadUnicode((int)256);
-            string file = r.ReadUnicode((int)256);
-
-            File.WriteAllText("ERROR" + Utils.GetRandomString(5) + ".txt", "Type: " + type.ToString() + Environment.NewLine + "Player: " + player.ToString() + Environment.NewLine + "Texture ID: " + textureId.ToString() + Environment.NewLine + host + Environment.NewLine + file);
+            short type = r.ReadInt16();
+            short player = r.ReadInt16();
+            short textureId = r.ReadInt16();
+            string host = r.ReadUnicode(256);
+            string file = r.ReadUnicode(256);
 
             if (type == 0 || type == 1)
             {
@@ -191,16 +189,10 @@ public class Room : WindowServantSP
                 using (System.Net.WebClient client = new System.Net.WebClient())
                 {
                     DownloadImage(type, player, url);
-                    //System.Threading.Thread downloadTextureThread = new System.Threading.Thread(() => DownloadImage(type, player, url));
-                    //downloadTextureThread.Start();
                 }
             }
         }
-        catch (Exception e)
-        {
-            using (StreamWriter writer = new StreamWriter("crash.txt"))
-                writer.Write(e.ToString());
-        }
+        catch { }
     }
 
     public void DownloadImage(int type, int player, string url)
@@ -229,11 +221,7 @@ public class Room : WindowServantSP
                 Program.I().ocgcore.gameInfo.SetOpponentFace(tex);
             }
         }
-        catch (Exception e)
-        {
-            using (StreamWriter writer = new StreamWriter("crash.txt"))
-                writer.Write(e.ToString());
-        }
+        catch { }
     }
 
     public void StocMessage_Chat(BinaryReader r)
@@ -645,6 +633,7 @@ public class Room : WindowServantSP
         Program.I().ocgcore.addPackage(p);
     }
 
+    bool facesSwapped = false;
     void showOcgcore()
     {
         if (handres != null)
@@ -663,7 +652,11 @@ public class Room : WindowServantSP
                     Program.I().ocgcore.name_1 = roomPlayers[0].name;
                     Program.I().ocgcore.name_0_tag = "---";
                     Program.I().ocgcore.name_1_tag = "---";
-                    Program.I().ocgcore.gameInfo.SwapFaces();
+                    if (!facesSwapped)
+                    {
+                        Program.I().ocgcore.gameInfo.SwapFaces();
+                        facesSwapped = true;
+                    }
                 }
                 else
                 {
