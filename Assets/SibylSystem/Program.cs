@@ -10,7 +10,6 @@ public class Program : MonoBehaviour
 
     #region Resources
     public Camera main_camera;
-    public facer face;
     public Light light;
     public AudioSource audio;
     public AudioClip zhankai;
