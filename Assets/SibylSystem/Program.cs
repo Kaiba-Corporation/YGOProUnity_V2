@@ -330,7 +330,6 @@ public class Program : MonoBehaviour
 #endif
         go(1, () =>
         {
-            UIHelper.iniFaces();
             initializeALLcameras();
             fixALLcamerasPreFrame();
             backGroundPic = new BackGroundPic();

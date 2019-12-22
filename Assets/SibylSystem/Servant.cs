@@ -764,25 +764,5 @@ public class Servant
         Program.I().cardDescription.mLog(hint);
     }
 
-    public void RMSshow_face(string hashCode, string name)  
-    {
-        RMSshow_clear();
-        currentMShash = hashCode;
-        currentMStype = messageSystemType.onlyYes;
-        currentMSwindow = create
-            (
-            Program.I().ES_Face,
-            MSentre(),
-            Vector3.zero,
-            true,
-            Program.ui_main_2d,
-            true,
-            new Vector3(((float)Screen.height) / 700f, ((float)Screen.height) / 700f, ((float)Screen.height) / 700f)
-            );
-        UIHelper.InterGameObject(currentMSwindow);
-        UIHelper.getByName<UITexture>(currentMSwindow, "face_").mainTexture = UIHelper.getFace(name);
-        UIHelper.registEvent(currentMSwindow, "yes_", ES_RMSpremono, new messageSystemValue());
-    }
-
     #endregion
 }

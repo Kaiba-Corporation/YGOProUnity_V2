@@ -192,12 +192,10 @@ public class Menu : WindowServantSP
                         case "online":
                             if (mats.Length == 5)
                             {
-                                UIHelper.iniFaces();//加载用户头像
                                 Program.I().selectServer.KF_onlineGame(mats[1], mats[2], mats[3], mats[4]);
                             }
                             if (mats.Length == 6)
                             {
-                                UIHelper.iniFaces();
                                 Program.I().selectServer.KF_onlineGame(mats[1], mats[2], mats[3], mats[4], mats[5]);
                             }
                             break;
@@ -210,14 +208,12 @@ public class Menu : WindowServantSP
                         case "replay":
                             if (mats.Length == 2)
                             {
-                                UIHelper.iniFaces();
                                 Program.I().selectReplay.KF_replay(mats[1]);//编辑录像
                             }
                             break;
                         case "puzzle":
                             if (mats.Length == 2)
                             {
-                                UIHelper.iniFaces();
                                 Program.I().puzzleMode.KF_puzzle(mats[1]);//运行残局
                             }
                             break;

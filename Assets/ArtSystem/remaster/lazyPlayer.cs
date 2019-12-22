@@ -138,14 +138,6 @@ public class lazyPlayer : MonoBehaviour {
     {
         mName = name_;
         UILabel_name.text = name_;
-        try
-        {
-            face.mainTexture = UIHelper.getFace(name_);
-        }
-        catch (Exception)
-        {
-            Debug.LogError("setName");
-        }
     }
 
     public string getName()

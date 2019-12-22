@@ -14,11 +14,12 @@ public class SelectServer : WindowServantSP
     UIInput inputVersion;
     string currentClientVersion = "0x" + String.Format("{0:X}", Config.ClientVersion);
 
+    public string name = "";
+
     public override void initialize()
     {
         createWindow(Program.I().new_ui_selectServer);
         UIHelper.registEvent(gameObject, "exit_", onClickExit);
-        UIHelper.registEvent(gameObject, "face_", onClickFace);
         UIHelper.registEvent(gameObject, "join_", onClickJoin);
         UIHelper.registEvent(gameObject, "roomList_", onClickRoomList);
         UIHelper.registEvent(gameObject, "quickSingle_", onQuickSingle);
@@ -280,16 +281,4 @@ public class SelectServer : WindowServantSP
             }
         }
     }
-
-    GameObject faceShow = null;
-
-    public string name = "";
-
-    void onClickFace()
-    {
-        name = UIHelper.getByName<UIInput>(gameObject, "name_").value;
-        RMSshow_face("showFace", name);
-        Config.Set("name", name);
-    }
-
 }
