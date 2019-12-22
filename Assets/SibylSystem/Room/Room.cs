@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -185,11 +185,7 @@ public class Room : WindowServantSP
                     return;
 
                 string url = System.Web.HttpUtility.UrlEncode(urlToEncode);
-
-                using (System.Net.WebClient client = new System.Net.WebClient())
-                {
-                    DownloadImage(type, player, url);
-                }
+                DownloadImage(type, player, url);
             }
         }
         catch { }
