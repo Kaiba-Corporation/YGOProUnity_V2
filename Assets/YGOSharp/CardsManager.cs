@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Data;
 using Mono.Data.Sqlite;
 using System;
@@ -23,25 +23,14 @@ namespace YGOSharp
         {
             nullName = InterString.Get("未知卡片");
             nullString = "";
-            nullString += "YGOPro2 MOBILE \nOCGCORE "+ "0x" + String.Format("{0:X}", Config.ClientVersion);
-            nullString += "\nMade by Szefo09";
+            nullString += "YGOPRO 2";
             nullString += "\r\n\r\n";
-            nullString += "English translation done by AntiMetaman.";
-            nullString += "\r\n";
-            //if (File.Exists("config/link.conf"))
-            //{
-            nullString += "\r\n";
-            nullString += "[url=http://ygopro2.lofter.com/lisence][u]http://ygopro2.lofter.com/lisence[/u][/url]";
-            nullString += "\r\n\r\n";
-            nullString += "[url=https://duelistsunite.org/][u]Official english website.[/u][/url]\r\n";
-            nullString += "[url=https://discord.gg/NTd2vJJ][u]Official english discord.[/u][/url]\r\n";
-            //}
-            nullString += "\r\n\r\n";
-            //nullString += "\r\n[url=https://jq.qq.com/?_wv=1027&k=44aGRzz][u]428563714[/u][/url]";
-            nullString += "源码：";
-            nullString += "\r\n「Android」\r\n[url=https://github.com/Unicorn369/YGOPro2_Droid][u]https://github.com/Unicorn369/YGOPro2_Droid[/u][/url]";
-            //nullString += "\r\nWindows：[url=https://github.com/lllyasviel/YGOProUnity_V2][u]https://github.com/lllyasviel/YGOProUnity_V2[/u][/url]";
-            nullString += "\r\n\r\n「Windows」\r\n[url=https://github.com/mercury233/ygopro2][u]https://github.com/mercury233/ygopro2[/u][/url]";
+            nullString += "Release by: Kaiba Corporation (ygopro.org) \r\n\r\n";
+            nullString += "YGOPRO 2 is currently in beta testing, please report any bugs you find on our forum: ygopro.club \r\n\r\n";
+            nullString += "Join the official YGOPRO 2 Discord server to get the latest news and information about upcoming updates: ygopro.org/discord/ \r\n\r\n";
+            nullString += "YGOPRO 2 is open source, anyone with programming knowledge can contribute bug fixes directly by making pull requests on our github page: github.com/Kaiba-Corporation/YGOProUnity_V2 \r\n\r\n";
+            nullString += "Special thanks to Fluorohydride, lllyasviel, IceYGO, Mercury233, Duelists Unite team and others for creating YGOPRO 2 and other required software, without them this game wouldn't have been possible. For a full list of credits please visit: ygopro.org/credits/ \r\n\r\n";
+
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + databaseFullPath))
             {
                 connection.Open();
