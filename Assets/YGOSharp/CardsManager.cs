@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using Mono.Data.Sqlite;
 using System;
@@ -200,6 +200,10 @@ namespace YGOSharp
             foreach (var item in _cards)
             {
                 Card card = item.Value;
+
+                if (card.Id >= 800000000 || card.Id <= 70 || card.Id == 420 || card.Id == 500 || card.Id == 55555 || card.Id == 19558409 || card.Id == 26630260)
+                    continue;
+
                 if ((card.Type & (uint)CardType.Token) == 0)
                 {
                     if (getName == ""
