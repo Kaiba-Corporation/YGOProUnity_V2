@@ -424,6 +424,14 @@ public class Room : WindowServantSP
         start_hand = r.ReadByte();
         draw_count = r.ReadByte();
         time_limit = r.ReadInt16();
+
+        try
+        {
+            Program.I().ocgcore.gameInfo.SetMyFace(UIHelper.getTexture2D("texture/duel/avatar.png"));
+            Program.I().ocgcore.gameInfo.SetOpponentFace(UIHelper.getTexture2D("texture/duel/avatar.png"));
+        }
+        catch { }
+
         ini();
         Program.I().shiftToServant(Program.I().room);
     }
