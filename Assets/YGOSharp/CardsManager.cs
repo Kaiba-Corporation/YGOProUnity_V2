@@ -55,14 +55,14 @@ namespace YGOSharp
             {
                 return _cards[id].clone();
             }
-            else if (id.ToString().Length >= 9)
-            {
-                int possibleOfficialID = GetOfficialID(id);
-                if (possibleOfficialID != 0)
-                {
-                    return _cards[possibleOfficialID].clone();
-                }
-            }
+            //else if (id.ToString().Length >= 9)
+            //{
+            //    int possibleOfficialID = GetOfficialID(id);
+            //    if (possibleOfficialID != 0)
+            //    {
+            //        return _cards[possibleOfficialID].clone();
+            //    }
+            //}
 
             return null;
         }
@@ -91,15 +91,15 @@ namespace YGOSharp
                 {
                     if (id.ToString().Length >= 9)
                     {
-                        int possibleOfficialID = GetOfficialID(id);
-                        if (possibleOfficialID != 0)
-                        {
-                            returnValue = Get(possibleOfficialID);
-                        }
-                        else
-                        {
-                            returnValue = new Card();
-                        }
+                        //int possibleOfficialID = GetOfficialID(id);
+                        //if (possibleOfficialID != 0)
+                        //{
+                        //    returnValue = Get(possibleOfficialID);
+                        //}
+                        //else
+                        //{
+                        returnValue = new Card();
+                        //}
                     }
                     else
                     {
@@ -111,55 +111,55 @@ namespace YGOSharp
             return returnValue;
         }
         private static string WebsiteData;
-        static int GetOfficialID(int id)
-        {
-            if (!Program.I().setting.autoDeckUpdate)
-            {
-                return 0;
-            }
-            try
-            {
-                if (WebsiteData == null)
-                {
-                    WWW www = new WWW("http://eeriecode.altervista.org/tools/get_beta_cards.php");
+        //static int GetOfficialID(int id)
+        //{
+        //    if (!Program.I().setting.autoDeckUpdate)
+        //    {
+        //        return 0;
+        //    }
+        //    try
+        //    {
+        //        if (WebsiteData == null)
+        //        {
+        //            WWW www = new WWW("http://eeriecode.altervista.org/tools/get_beta_cards.php");
 
-                    while (!www.isDone)
-                    {
-                        if (Application.internetReachability == NetworkReachability.NotReachable || !string.IsNullOrEmpty(www.error))
-                        {
-                            throw new Exception("No Internet connection!");
-                        }
-                    }
-                    if (www.error != null)
-                    {
-                        Debug.Log(www.error);
-                        WebsiteData = " ";
-                    }
-                    else
-                    {
-                        WebsiteData = www.text;
-                        WebsiteData = "{\"betaToOfficialCards\":" + WebsiteData + "}";
-                    }
-                }
+        //            while (!www.isDone)
+        //            {
+        //                if (Application.internetReachability == NetworkReachability.NotReachable || !string.IsNullOrEmpty(www.error))
+        //                {
+        //                    throw new Exception("No Internet connection!");
+        //                }
+        //            }
+        //            if (www.error != null)
+        //            {
+        //                Debug.Log(www.error);
+        //                WebsiteData = " ";
+        //            }
+        //            else
+        //            {
+        //                WebsiteData = www.text;
+        //                WebsiteData = "{\"betaToOfficialCards\":" + WebsiteData + "}";
+        //            }
+        //        }
 
-                BetaToOfficialCardListObject betaToOfficialCards = JsonUtility.FromJson<BetaToOfficialCardListObject>(WebsiteData);
-                var card = betaToOfficialCards.betaToOfficialCards.FirstOrDefault(x => x.ucode == id.ToString());
-                if (card == null)
-                {
-                    return 0;
-                }
-                else
-                {
-                    int newid = int.Parse(card.ocode, System.Globalization.NumberFormatInfo.InvariantInfo);
-                    return newid;
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.Log(e);
-            }
-            return 0;
-        }
+        //        BetaToOfficialCardListObject betaToOfficialCards = JsonUtility.FromJson<BetaToOfficialCardListObject>(WebsiteData);
+        //        var card = betaToOfficialCards.betaToOfficialCards.FirstOrDefault(x => x.ucode == id.ToString());
+        //        if (card == null)
+        //        {
+        //            return 0;
+        //        }
+        //        else
+        //        {
+        //            int newid = int.Parse(card.ocode, System.Globalization.NumberFormatInfo.InvariantInfo);
+        //            return newid;
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Debug.Log(e);
+        //    }
+        //    return 0;
+        //}
 
         private static void LoadCard(IDataRecord reader)
         {
