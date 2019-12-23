@@ -87,7 +87,7 @@ public class GameList : MonoBehaviour {
 
     private void OnDuelAI()
     {
-        Program.I().tdoane.client.Send("DuelingRobot<{]>Altergeist");
+        Program.I().tdoane.client.Send("DuelingRobot<{]>" + Program.I().tdoane.BotDecks[Program.I().tdoane.rand.Next(Program.I().tdoane.BotDecks.Count)]);
     }
 
     private void OnLeft()

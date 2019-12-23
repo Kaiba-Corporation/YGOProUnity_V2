@@ -18,6 +18,12 @@ public class TDOANE : MonoBehaviour {
 
     public string Username;
 
+    public List<string> BotDecks = new List<string>() { "Altergeist", "Blackwing", "Blue-Eyes", "BlueEyesMaxDragon", "Burn", "ChainBurn", "CyberDragon", "DarkMagician", "Dragunity",
+        "Evilswarm", "Frog", "Gravekeeper", "Graydle", "GrenMajuThunderBoarder", "Horus", "Level8", "Lightsworn", "LightswornShaddoldinosour", "MokeyMokey", "MokeyMokeyKing", "Nekroz",
+        "Orcust", "Phantasm", "Qliphort", "Rainbow", "Rank5", "ST1732", "Salamangreat", "SkyStriker", "ToadallyAwesome", "Trickstar", "Yosenju", "ZexalWeapons", "Zoodiac" };
+
+    public System.Random rand = new System.Random();
+
     public GameObject loginForm;
     public GameObject registerForm;
     public GameObject gameList;
