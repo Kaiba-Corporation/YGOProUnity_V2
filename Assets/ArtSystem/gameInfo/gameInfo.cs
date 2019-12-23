@@ -383,8 +383,6 @@ public class gameInfo : MonoBehaviour
         opponent.api_healthHint.text = ((float)Program.I().ocgcore.life_1 > 0 ? Program.I().ocgcore.life_1 : 0).ToString();
         me.api_name.text = Program.I().ocgcore.name_0_c;
         opponent.api_name.text = Program.I().ocgcore.name_1_c;
-        //me.api_face.mainTexture = UIHelper.getFace(Program.I().ocgcore.name_0_c);
-        //opponent.api_face.mainTexture = UIHelper.getFace(Program.I().ocgcore.name_1_c);
         iTween.MoveToLocal(me.api_healthBar.gameObject, new Vector3(
             (float)(me.api_healthBar.width) - getRealLife(Program.I().ocgcore.life_0) / ((float)Program.I().ocgcore.lpLimit) * (float)(me.api_healthBar.width),
             me.api_healthBar.gameObject.transform.localPosition.y,

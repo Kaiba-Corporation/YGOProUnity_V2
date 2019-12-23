@@ -25,8 +25,7 @@ public static class TcpHelper
                 canjoin = false;
                 try
                 {
-                    File.WriteAllText("log.txt", "IP: " + ipString + Environment.NewLine + "Name: " + name + Environment.NewLine + "Port: " + portString + Environment.NewLine + "Game Name: " + pswString + Environment.NewLine + "Version: " + version);
-                    Thread.Sleep(1000);
+                    Thread.Sleep(1500);
                     tcpClient = new TcpClientWithTimeout(ipString, int.Parse(portString), 3000).Connect();
                     networkStream = tcpClient.GetStream();
                     Thread t = new Thread(receiver);
@@ -34,9 +33,8 @@ public static class TcpHelper
                     CtosMessage_PlayerInfo(name);
                     CtosMessage_JoinGame(pswString, version);
                 }
-                catch (Exception ex)
+                catch
                 {
-                    File.WriteAllText("error.txt", ex.ToString());
                     Program.DEBUGLOG("onDisConnected 10");
                 }
                 canjoin = true;

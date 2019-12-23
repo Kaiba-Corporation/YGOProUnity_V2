@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.ComponentModel;
@@ -87,10 +87,7 @@ public class Updater : MonoBehaviour {
             webClient.DownloadProgressChanged += ProgressChanged;
             webClient.DownloadDataAsync(new Uri(url));
         }
-        catch (Exception e)
-        {
-            File.WriteAllText("ERROR.txt", e.ToString());
-        }
+        catch { }
     }
 
     private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
