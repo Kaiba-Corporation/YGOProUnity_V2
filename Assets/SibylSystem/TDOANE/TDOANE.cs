@@ -58,8 +58,8 @@ public class TDOANE : MonoBehaviour {
                 return false;
             }
 
-            if (File.Exists("version.conf"))
-                MinorVersion = Convert.ToInt32(File.ReadAllText("version.conf"));
+            if (File.Exists("config/version.conf"))
+                MinorVersion = Convert.ToInt32(File.ReadAllText("config/version.conf"));
             else
             {
                 CreateMessageBox("Game Files Corrupted!", "Your game files are corrupted, please redownload the game from YGOPRO.ORG", "Close");

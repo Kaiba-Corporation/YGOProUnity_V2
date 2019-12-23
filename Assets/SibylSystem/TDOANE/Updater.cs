@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Net;
 using System.ComponentModel;
@@ -102,7 +102,7 @@ public class Updater : MonoBehaviour {
     private void Completed(object sender, DownloadDataCompletedEventArgs e)
     {
         Program.I().ExtractZipFile(e.Result, "", true);
-        File.WriteAllText("version.conf", myVersion.ToString());
+        File.WriteAllText("config/version.conf", myVersion.ToString());
         CheckForUpdates();
     }
 }
