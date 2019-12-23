@@ -25,12 +25,12 @@ namespace YGOSharp
             nullString = "";
             nullString += "YGOPRO 2";
             nullString += "\r\n\r\n";
-            nullString += "Release by: Kaiba Corporation (ygopro.org) \r\n\r\n";
-            nullString += "YGOPRO 2 is currently in beta testing, please report any bugs you find on our forum: ygopro.club \r\n\r\n";
-            nullString += "Join the official YGOPRO 2 Discord server to get the latest news and information about upcoming updates: ygopro.org/discord/ \r\n\r\n";
-            nullString += "YGOPRO 2 is open source, anyone with programming knowledge can contribute bug fixes directly by making pull requests on our github page: github.com/Kaiba-Corporation/YGOProUnity_V2 \r\n\r\n";
-            nullString += "Special thanks to Fluorohydride, lllyasviel, IceYGO, Mercury233, Duelists Unite team and others for creating YGOPRO 2 and other required software, without them this game wouldn't have been possible. For a full list of credits please visit: ygopro.org/credits/ \r\n\r\n";
-
+            nullString += "Release by: Kaiba Corporation ([url=ygopro.org][u]ygopro.org[/u][/url]) \r\n\r\n";
+            nullString += "YGOPRO 2 is currently in beta testing, please report any bugs you find on our forum: ([url=ygopro.club][u]ygopro.club[/u][/url]) \r\n\r\n";
+            nullString += "Join the official YGOPRO 2 Discord server to get the latest news and information about upcoming updates: [url=ygopro.org/discord][u]ygopro.org/discord[/u][/url] \r\n\r\n";
+            nullString += "YGOPRO 2 is open source, anyone with programming knowledge can contribute bug fixes directly by making pull requests on our github page: [url=github.com/Kaiba-Corporation/YGOProUnity_V2][u]github.com/Kaiba-Corporation/YGOProUnity_V2[/u][/url] \r\n\r\n";
+            nullString += "Special thanks to Fluorohydride, lllyasviel, IceYGO, Mercury233, Duelists Unite team and others for creating YGOPRO 2 and other required software, without them this game wouldn't have been possible. For a full list of credits please visit: [url=ygopro.org/credits][u]ygopro.org/credits[/u][/url] \r\n\r\n";
+            
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + databaseFullPath))
             {
                 connection.Open();
