@@ -425,6 +425,15 @@ public class Room : WindowServantSP
         draw_count = r.ReadByte();
         time_limit = r.ReadInt16();
 
+        facesSwapped = false;
+
+        try
+        {
+            GameTextureManager.myBack = UIHelper.getTexture2D("texture/duel/me.jpg");
+            GameTextureManager.opBack = UIHelper.getTexture2D("texture/duel/opponent.jpg");
+        }
+        catch { }
+
         try
         {
             Program.I().ocgcore.gameInfo.SetMyFace(UIHelper.getTexture2D("texture/duel/avatar.png"));
