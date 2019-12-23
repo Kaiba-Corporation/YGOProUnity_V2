@@ -669,25 +669,6 @@ public class GameTextureManager
         try
         {
             string path = "picture/closeup/" + pic.code.ToString() + ".png";
-#if UNITY_EDITOR || UNITY_ANDROID || UNITY_IOS //Android、iPhone
-            if (!File.Exists(path) && AutoPicDownload && Program.I().setting.pictureDownloadVersion.value != "Series 10 HQ")
-            {
-                df.Download("https://pictures.duelistsunite.org/lq/closeup/" + pic.code.ToString() + ".png", "picture/closeup/" + pic.code.ToString() + ".png");
-            }
-            else if((!File.Exists(path) && AutoPicDownload))
-            {
-                df.Download("https://pictures.duelistsunite.org/hq/closeup/" + pic.code.ToString() + ".png", "picture/closeup/" + pic.code.ToString() + ".png");
-            }
-#else
-            if (!File.Exists(path) && AutoPicDownload)
-            {
-                _basicBackgroundWorkerCloseupDownload.EnqueueWork(() =>
-                {
-                    df.Download("https://pictures.duelistsunite.org/hq/closeup/" + pic.code.ToString() + ".png", "picture/closeup/" + pic.code.ToString() + ".png", pic, false);
-                });
-                return;
-            }
-#endif
             if (!File.Exists(path))
             {
 #if UNITY_STANDALONE_WIN //编译器、Windows
@@ -930,12 +911,6 @@ public class GameTextureManager
             {
                 path = "pics/" + pic.code.ToString() + ".jpg";
             }
-            //if (!File.Exists(path) && pic.code != 0)
-            //{
-            //    //下载卡图(177x254)
-            //    //df.Download("http://android.ygopro.win/YGOMobile/pics/" + pic.code.ToString() + ".jpg", "expansions/pics/" + pic.code.ToString() + ".jpg");
-            //   // path = "expansions/pics/" + pic.code.ToString() + ".jpg";
-            //}
 #if UNITY_ANDROID || UNITY_IOS //Android、iPhone
             if (Program.I().setting != null)
             {
@@ -954,24 +929,6 @@ public class GameTextureManager
                             }
                             break;
                         }
-                    //case "Anime":
-                    //    {
-                    //        path = "picture/card-ani/" + pic.code.ToString() + ".jpg";
-                    //        if (AutoPicDownload && !File.Exists(path))
-                    //        {
-                    //            df.Download("http://duelistsunite.org/picture/card-ani/" + pic.code.ToString() + ".jpg", "picture/card-ani/" + pic.code.ToString() + ".jpg");
-                    //            if (!File.Exists(path))
-                    //            {
-                    //                path = "picture/card/" + pic.code.ToString() + ".jpg";
-                    //                if (!File.Exists(path))
-                    //                {
-                    //                    df.Download("https://rawcdn.githack.com/Kaiba-Corporation/ygopro-images/b8559b1/" + pic.code.ToString() + ".jpg", "picture/card/" + pic.code.ToString() + ".jpg");
-                    //                }
-                    //            }
-                    //        }
-
-                    //        break;
-                    //    }
                     case "Series 10 HQ":
                         {
                             path = "picture/card/" + pic.code.ToString() + ".jpg";
@@ -1024,12 +981,6 @@ public class GameTextureManager
                 });
                 return;
             }
-            //if (!File.Exists(path) && pic.code != 0)
-            //{
-            //    //下载先行卡卡图(336x490)
-            //    //df.Download("http://update.ygopro.win/ygopro2-data/expansions/pics/" + pic.code.ToString() + ".jpg", "picture/cardIn8thEdition/" + pic.code.ToString() + ".jpg");
-            //    //path = "picture/cardIn8thEdition/" + pic.code.ToString() + ".jpg";
-            //}
             LoadCardPicture(pic, path);
         }
         catch (Exception e)
