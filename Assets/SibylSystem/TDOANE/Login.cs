@@ -36,6 +36,17 @@ public class Login : MonoBehaviour {
         Program.I().tdoane.ShowRegisterForm();
     }
 
+    public void LoginAfterExtractingImages()
+    {
+        if (!Program.I().tdoane.DownloadClientInfo())
+        {
+            Program.I().tdoane.loginForm.SetActive(false);
+            return;
+        }
+
+        UserLogin();
+    }
+
     public void UserLogin()
     {
         if (usernameTxt.value.Length == 0 || passwordTxt.value.Length == 0)

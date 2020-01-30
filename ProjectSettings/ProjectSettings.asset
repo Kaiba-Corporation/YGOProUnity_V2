@@ -232,8 +232,8 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: F:/Yu-Gi-Oh! The Dawn of a New Era/YGOProUnity_V2/ygopro.keystore
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: C:/Users/Miodrag/Desktop/ygopro.keystore
+  AndroidKeyaliasName: ygopro
   AndroidTVCompatibility: 0
   AndroidIsGame: 0
   androidEnableBanner: 1

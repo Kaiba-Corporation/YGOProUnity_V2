@@ -301,10 +301,10 @@ public class Program : MonoBehaviour
             DirPaths(Path.Combine(sdcardpath,"ygocore/pack/"));
             DirPaths(Path.Combine(sdcardpath,"ygocore/updates/"));
             DirPaths(Path.Combine(sdcardpath,"ygocore/picture/card/"));
-            DirPaths(Path.Combine(sdcardpath,"ygocore/picture/card-ani/"));
+            DirPaths(Path.Combine(sdcardpath,"ygocore/picture/closeup/"));
             DirPaths(Path.Combine(sdcardpath,"ygocore/picture/field/"));
             DirPaths(Path.Combine(sdcardpath,"ygocore/replay/"));
-            DirPaths(Path.Combine(sdcardpath,"0/ygocore/sound/"));
+            DirPaths(Path.Combine(sdcardpath,"ygocore/sound/"));
             DirPaths(Path.Combine(sdcardpath,"ygocore/texture/common/"));
             DirPaths(Path.Combine(sdcardpath,"ygocore/texture/face/"));
             DirPaths(Path.Combine(sdcardpath,"ygocore/texture/duel/healthBar/"));
@@ -312,8 +312,8 @@ public class Program : MonoBehaviour
             DirPaths(Path.Combine(sdcardpath,"ygocore/texture/ui/"));
             File.Create(Path.Combine(sdcardpath,"ygocore/.nomedia"));
             File.Create(Path.Combine(sdcardpath,"ygocore/picture/card/.nomedia"));
+            File.Create(Path.Combine(sdcardpath,"ygocore/picture/closeup/.nomedia"));
             File.Create(Path.Combine(sdcardpath,"ygocore/picture/field/.nomedia"));
-            File.Create(Path.Combine(sdcardpath,"ygocore/picture/card-ani/.nomedia"));
         }
 
         Environment.CurrentDirectory = Path.Combine(sdcardpath, "ygocore");
@@ -407,7 +407,7 @@ public class Program : MonoBehaviour
 
     }
 
-    public void ExtractZipFile(byte[] data, string outFolder, bool update)
+    public void ExtractZipFile(byte[] data, string outFolder, bool update, bool extractImages = false)
     {
         ZipConstants.DefaultCodePage = 0;
         ZipFile zf = null;
@@ -418,7 +418,7 @@ public class Program : MonoBehaviour
             {
                 zf = new ZipFile(mstrm);
 
-                if (update)
+                if (update && !extractImages)
                     tdoane.updateBox.GetComponent<Updater>().totalFilesToExtract = zf.Count;
 
                 foreach (ZipEntry zipEntry in zf)

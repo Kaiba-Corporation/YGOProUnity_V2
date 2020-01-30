@@ -24,6 +24,8 @@ public class TDOANE : MonoBehaviour {
 
     public System.Random rand = new System.Random();
 
+    public bool ImagesExtracted = true;
+
     public GameObject loginForm;
     public GameObject registerForm;
     public GameObject gameList;
@@ -38,7 +40,7 @@ public class TDOANE : MonoBehaviour {
         client.Tick();
     }
 
-    public bool DownloadClientInfo()
+    public bool DownloadClientInfo(bool register = false)
     {
         try
         {
@@ -58,6 +60,9 @@ public class TDOANE : MonoBehaviour {
                 return false;
             }
 
+            if (register)
+                return true;
+
             if (File.Exists("config/version.conf"))
                 MinorVersion = Convert.ToInt32(File.ReadAllText("config/version.conf"));
             else
@@ -65,6 +70,15 @@ public class TDOANE : MonoBehaviour {
                 CreateMessageBox("Game Files Corrupted!", "Your game files are corrupted, please redownload the game from YGOPRO.ORG", "Close");
                 return false;
             }
+
+            if (MinorVersion == -1)
+            {
+                ImagesExtracted = false;
+                ExtractImages();
+            }
+
+            if (!ImagesExtracted)
+                return false;
 
             if (MinorVersion != minorVersion)
             {
@@ -114,5 +128,13 @@ public class TDOANE : MonoBehaviour {
     {
         updateBox = (GameObject)Instantiate(Resources.Load("update_box"));
         updateBox.GetComponent<Updater>().InitializeUpdater(myVersion, requiredVersion);
+    }
+
+    public void ExtractImages()
+    {
+        loginForm.SetActive(false);
+
+        updateBox = (GameObject)Instantiate(Resources.Load("update_box"));
+        updateBox.GetComponent<Updater>().ExtractImages();
     }
 }

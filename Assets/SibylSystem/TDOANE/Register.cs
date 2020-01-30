@@ -18,7 +18,7 @@ public class Register : MonoBehaviour {
 
     public void OnRegister()
     {
-        if (!Program.I().tdoane.DownloadClientInfo())
+        if (!Program.I().tdoane.DownloadClientInfo(true))
         {
             Program.I().tdoane.registerForm.SetActive(false);
             return;

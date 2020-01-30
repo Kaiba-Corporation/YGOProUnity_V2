@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Threading;
 using System.ComponentModel;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,8 +26,17 @@ public class Updater : MonoBehaviour {
 
     List<string> updates = new List<string>();
 
+    public bool extractingImages = false;
+
     void Update()
     {
+        if (extractingImages && Program.I().tdoane.ImagesExtracted)
+        {
+            extractingImages = false;
+            Program.I().tdoane.loginForm.GetComponent<Login>().LoginAfterExtractingImages();
+            Program.I().tdoane.updateBox.SetActive(false);
+        }
+
         decimal progressPercentage;
 
         if (updateError != "")
@@ -94,6 +104,44 @@ public class Updater : MonoBehaviour {
     {
         bytesReceived += e.BytesReceived;
         totalBytesToReceive = e.TotalBytesToReceive;
+    }
+
+    public void ExtractImages()
+    {
+        extractingImages = true;
+
+        downloadingUpdate = 1;
+        updatesToDownload = 1;
+
+        bytesReceived = 0;
+        totalBytesToReceive = 0;
+
+        filesExtracted = 0;
+        totalFilesToExtract = 19340;
+
+        Thread extractImageFiles = new Thread(ExtractImageFiles);
+        extractImageFiles.Start();
+    }
+
+    private void ExtractImageFiles()
+    {
+        int fileId = 0;
+
+        while (fileId <= 17)
+        {
+            string filePath = Application.streamingAssetsPath + "/picture/picture_" + fileId.ToString() + ".zip";
+
+            var www = new WWW(filePath);
+            while (!www.isDone) { }
+            byte[] images = www.bytes;
+
+            Program.I().ExtractZipFile(images, "", true, true);
+
+            fileId++;
+        }
+;
+        File.WriteAllText("config/version.conf", "0");
+        Program.I().tdoane.ImagesExtracted = true;
     }
 
     private void Completed(object sender, DownloadDataCompletedEventArgs e)
