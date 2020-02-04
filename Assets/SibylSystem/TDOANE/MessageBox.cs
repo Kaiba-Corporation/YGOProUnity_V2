@@ -21,6 +21,8 @@ public class MessageBox : MonoBehaviour {
             Program.I().tdoane.loginForm.SetActive(true);
         if (nextForm == "Register")
             Program.I().tdoane.registerForm.SetActive(true);
+        if (nextForm == "Host Custom")
+            Program.I().tdoane.hostCustomForm.SetActive(true);
         if (nextForm == "Close")
             Program.I().quit();
 

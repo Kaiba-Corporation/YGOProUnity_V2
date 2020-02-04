@@ -43,7 +43,7 @@ public class GameList : MonoBehaviour {
         UIHelper.registEvent(gameObject, "btn_host_single", OnSingle);
         UIHelper.registEvent(gameObject, "btn_host_match", OnMatch);
         UIHelper.registEvent(gameObject, "btn_host_tag", OnTag);
-        UIHelper.registEvent(gameObject, "btn_duel_ai", OnDuelAI);
+        UIHelper.registEvent(gameObject, "btn_host_custom", OnCustom);
         UIHelper.registEvent(gameObject, "btn_left", OnLeft);
         UIHelper.registEvent(gameObject, "btn_right", OnRight);
         UIHelper.registEvent(gameObject, "btn_back", OnBack);
@@ -85,10 +85,16 @@ public class GameList : MonoBehaviour {
         Program.I().selectServer.joinGame(Program.I().tdoane.Username, Program.I().tdoane.IP, Program.I().tdoane.GamePort.ToString(), gameName);
     }
 
-    private void OnDuelAI()
+    private void OnCustom()
     {
-        Program.I().tdoane.client.Send("DuelingRobot<{]>" + Program.I().tdoane.BotDecks[Program.I().tdoane.rand.Next(Program.I().tdoane.BotDecks.Count)]);
+        Program.I().tdoane.hostCustomForm = (GameObject)Instantiate(Resources.Load("mod_host_custom"));
+        Program.I().tdoane.gameList.SetActive(false);
     }
+
+    //private void OnDuelAI()
+    //{
+    //    Program.I().tdoane.client.Send("DuelingRobot<{]>" + Program.I().tdoane.BotDecks[Program.I().tdoane.rand.Next(Program.I().tdoane.BotDecks.Count)]);
+    //}
 
     private void OnLeft()
     {

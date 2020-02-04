@@ -30,6 +30,7 @@ public class TDOANE : MonoBehaviour {
     public GameObject registerForm;
     public GameObject gameList;
     public GameObject updateBox;
+    public GameObject hostCustomForm;
 
     public NetworkClient client = new NetworkClient();
 
