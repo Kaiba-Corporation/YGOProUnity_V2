@@ -34,7 +34,7 @@ public class Updater : MonoBehaviour {
         {
             extractingImages = false;
             Program.I().tdoane.loginForm.GetComponent<Login>().LoginAfterExtractingImages();
-            Program.I().tdoane.updateBox.SetActive(false);
+            Program.I().tdoane.updateBoxForm.SetActive(false);
         }
 
         decimal progressPercentage;
@@ -73,7 +73,7 @@ public class Updater : MonoBehaviour {
         }
         else
         {
-            Program.I().tdoane.updateBox.SetActive(false);
+            Program.I().tdoane.updateBoxForm.SetActive(false);
             Program.I().tdoane.loginForm.GetComponent<Login>().UserLogin();
         }
     }

@@ -26,11 +26,14 @@ public class TDOANE : MonoBehaviour {
 
     public bool ImagesExtracted = true;
 
+    public bool isBotDuel = false;
+
     public GameObject loginForm;
     public GameObject registerForm;
-    public GameObject gameList;
-    public GameObject updateBox;
+    public GameObject gameListForm;
+    public GameObject updateBoxForm;
     public GameObject hostCustomForm;
+    public GameObject duelAiForm;
 
     public NetworkClient client = new NetworkClient();
 
@@ -116,26 +119,34 @@ public class TDOANE : MonoBehaviour {
         loginForm.SetActive(true);
     }
 
-    public void ShowGameList()
+    public void ShowGameListForm()
     {
         Program.I().tdoane.client.Send("GetRooms<{]>0");
-        if (gameList == null)
-            gameList = Instantiate(Resources.Load("mod_room_list")) as GameObject;
+        if (gameListForm == null)
+            gameListForm = Instantiate(Resources.Load("mod_room_list")) as GameObject;
 
-        gameList.SetActive(true);
+        gameListForm.SetActive(true);
+    }
+
+    public void ShowDuelAiForm()
+    {
+        if (duelAiForm == null)
+            duelAiForm = Instantiate(Resources.Load("mod_duel_ai")) as GameObject;
+
+        duelAiForm.SetActive(true);
     }
 
     public void DownloadUpdates(int myVersion, int requiredVersion)
     {
-        updateBox = (GameObject)Instantiate(Resources.Load("update_box"));
-        updateBox.GetComponent<Updater>().InitializeUpdater(myVersion, requiredVersion);
+        updateBoxForm = (GameObject)Instantiate(Resources.Load("update_box"));
+        updateBoxForm.GetComponent<Updater>().InitializeUpdater(myVersion, requiredVersion);
     }
 
     public void ExtractImages()
     {
         loginForm.SetActive(false);
 
-        updateBox = (GameObject)Instantiate(Resources.Load("update_box"));
-        updateBox.GetComponent<Updater>().ExtractImages();
+        updateBoxForm = (GameObject)Instantiate(Resources.Load("update_box"));
+        updateBoxForm.GetComponent<Updater>().ExtractImages();
     }
 }

@@ -127,7 +127,7 @@ public class HostCustom : MonoBehaviour {
     private void OnBack()
     {
         Program.I().tdoane.hostCustomForm.SetActive(false);
-        Program.I().tdoane.ShowGameList();
+        Program.I().tdoane.ShowGameListForm();
     }
 
     private void OnDuelMode()

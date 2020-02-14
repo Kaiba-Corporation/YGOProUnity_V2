@@ -67,34 +67,29 @@ public class GameList : MonoBehaviour {
     private void OnSingle()
     {
         string gameName = "0004051,8000," + Utils.GetRandomString(6);
-        Program.I().tdoane.gameList.SetActive(false);
+        Program.I().tdoane.gameListForm.SetActive(false);
         Program.I().selectServer.joinGame(Program.I().tdoane.Username, Program.I().tdoane.IP, Program.I().tdoane.GamePort.ToString(), gameName);
     }
 
     private void OnMatch()
     {
         string gameName = "0014051,8000," + Utils.GetRandomString(6);
-        Program.I().tdoane.gameList.SetActive(false);
+        Program.I().tdoane.gameListForm.SetActive(false);
         Program.I().selectServer.joinGame(Program.I().tdoane.Username, Program.I().tdoane.IP, Program.I().tdoane.GamePort.ToString(), gameName);
     }
 
     private void OnTag()
     {
         string gameName = "0024051,8000," + Utils.GetRandomString(6);
-        Program.I().tdoane.gameList.SetActive(false);
+        Program.I().tdoane.gameListForm.SetActive(false);
         Program.I().selectServer.joinGame(Program.I().tdoane.Username, Program.I().tdoane.IP, Program.I().tdoane.GamePort.ToString(), gameName);
     }
 
     private void OnCustom()
     {
         Program.I().tdoane.hostCustomForm = (GameObject)Instantiate(Resources.Load("mod_host_custom"));
-        Program.I().tdoane.gameList.SetActive(false);
+        Program.I().tdoane.gameListForm.SetActive(false);
     }
-
-    //private void OnDuelAI()
-    //{
-    //    Program.I().tdoane.client.Send("DuelingRobot<{]>" + Program.I().tdoane.BotDecks[Program.I().tdoane.rand.Next(Program.I().tdoane.BotDecks.Count)]);
-    //}
 
     private void OnLeft()
     {
@@ -349,13 +344,13 @@ public class GameList : MonoBehaviour {
         string roomInfo = tempRoomList[roomId + (5 * (page - 1))];
         string[] roomParts = Regex.Split(roomInfo, ":");
 
-        Program.I().tdoane.gameList.SetActive(false);
+        Program.I().tdoane.gameListForm.SetActive(false);
         Program.I().selectServer.joinGame(Program.I().tdoane.Username, Program.I().tdoane.IP, Program.I().tdoane.GamePort.ToString(), roomParts[0]);
     }
 
     void OnBack()
     {
-        Program.I().tdoane.gameList.SetActive(false);
+        Program.I().tdoane.gameListForm.SetActive(false);
         Program.I().shiftToServant(Program.I().menu);
     }
 

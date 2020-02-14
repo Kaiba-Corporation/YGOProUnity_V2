@@ -140,13 +140,14 @@ public class NetworkClient : MonoBehaviour {
     {
         string port = message[1];
 
-        Program.I().tdoane.gameList.SetActive(false);
+        Program.I().tdoane.isBotDuel = true;
+        Program.I().tdoane.duelAiForm.SetActive(false);
         Program.I().selectServer.joinGame(Program.I().tdoane.Username, Program.I().tdoane.IP, port, "0");
     }
 
     private void OnRooms(string[] message)
     {
         string[] rooms = Regex.Split(message[1], ";");
-        Program.I().tdoane.gameList.GetComponent<GameList>().UpdateRoomList(rooms);
+        Program.I().tdoane.gameListForm.GetComponent<GameList>().UpdateRoomList(rooms);
     }
 }

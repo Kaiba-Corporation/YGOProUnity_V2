@@ -419,14 +419,14 @@ public class Program : MonoBehaviour
                 zf = new ZipFile(mstrm);
 
                 if (update && !extractImages)
-                    tdoane.updateBox.GetComponent<Updater>().totalFilesToExtract = zf.Count;
+                    tdoane.updateBoxForm.GetComponent<Updater>().totalFilesToExtract = zf.Count;
 
                 foreach (ZipEntry zipEntry in zf)
                 {
                     if (!zipEntry.IsFile)
                     {
                         if (update)
-                            tdoane.updateBox.GetComponent<Updater>().filesExtracted++;
+                            tdoane.updateBoxForm.GetComponent<Updater>().filesExtracted++;
 
                         continue;
                     }
@@ -445,17 +445,17 @@ public class Program : MonoBehaviour
                     }
 
                     if (update)
-                        tdoane.updateBox.GetComponent<Updater>().filesExtracted++;
+                        tdoane.updateBoxForm.GetComponent<Updater>().filesExtracted++;
                 }
             }
 
             if (update)
-                tdoane.updateBox.GetComponent<Updater>().myVersion++;
+                tdoane.updateBoxForm.GetComponent<Updater>().myVersion++;
         }
         catch
         {
             if (update)
-                tdoane.updateBox.GetComponent<Updater>().updateError = "Error Installing Update!" + Environment.NewLine + Environment.NewLine + "Please redownload the game from YGOPRO.ORG";
+                tdoane.updateBoxForm.GetComponent<Updater>().updateError = "Error Installing Update!" + Environment.NewLine + Environment.NewLine + "Please redownload the game from YGOPRO.ORG";
         }
         finally
         {
@@ -926,7 +926,7 @@ public class Program : MonoBehaviour
         }
         if (to != selectServer && selectServer.isShowed)
         {
-            Program.I().tdoane.gameList.SetActive(false);
+            tdoane.gameListForm.SetActive(false);
             selectServer.hide();
         }
         if (to != selectReplay && selectReplay.isShowed)
@@ -959,7 +959,15 @@ public class Program : MonoBehaviour
         if (to == roomList && !roomList.isShowed) roomList.show();
 
         if (to == selectServer && selectServer.isShowed == false)
-           Program.I().tdoane.gameList.SetActive(true);
+        {
+            if (tdoane.isBotDuel == true)
+            {
+                tdoane.isBotDuel = false;
+                tdoane.ShowDuelAiForm();
+            }
+            else
+                tdoane.ShowGameListForm();
+        }
     }
 
     #endregion

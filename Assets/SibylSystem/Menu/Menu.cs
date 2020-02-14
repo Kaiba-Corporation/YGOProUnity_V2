@@ -14,12 +14,12 @@ public class Menu : WindowServantSP
     {
         string hint = File.ReadAllText("config/hint.conf");
         createWindow(Program.I().new_ui_menu);
-        UIHelper.registEvent(gameObject, "setting_", onClickSetting);
-        UIHelper.registEvent(gameObject, "deck_", onClickSelectDeck);
         UIHelper.registEvent(gameObject, "online_", onClickOnline);
+        UIHelper.registEvent(gameObject, "ai_", onClickAI);
         UIHelper.registEvent(gameObject, "replay_", onClickReplay);
         UIHelper.registEvent(gameObject, "single_", onClickPizzle);
-        //UIHelper.registEvent(gameObject, "ai_", onClickAI);
+        UIHelper.registEvent(gameObject, "deck_", onClickSelectDeck);
+        UIHelper.registEvent(gameObject, "setting_", onClickSetting);
 #if UNITY_IOS
         destroy(UIHelper.getByName(gameObject, "exit")); //No Exit button functionality in iOS
 #else
@@ -75,13 +75,13 @@ public class Menu : WindowServantSP
     void onClickOnline()
     {
         Program.I().menu.hide();
-        Program.I().tdoane.ShowGameList();
-        //Program.I().shiftToServant(Program.I().selectServer);
+        Program.I().tdoane.ShowGameListForm();
     }
 
     void onClickAI()
     {
-        Program.I().shiftToServant(Program.I().aiRoom);
+        Program.I().menu.hide();
+        Program.I().tdoane.ShowDuelAiForm();
     }
 
     void onClickPizzle()
