@@ -959,15 +959,7 @@ public class Program : MonoBehaviour
         if (to == roomList && !roomList.isShowed) roomList.show();
 
         if (to == selectServer && selectServer.isShowed == false)
-        {
-            if (tdoane.isBotDuel == true)
-            {
-                tdoane.isBotDuel = false;
-                tdoane.ShowDuelAiForm();
-            }
-            else
-                tdoane.ShowGameListForm();
-        }
+            menu.show();
     }
 
     #endregion

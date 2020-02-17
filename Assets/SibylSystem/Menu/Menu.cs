@@ -86,7 +86,8 @@ public class Menu : WindowServantSP
 
     void onClickPizzle()
     {
-        Program.I().shiftToServant(Program.I().puzzleMode);
+        Program.I().menu.hide();
+        Program.I().tdoane.RequestProfile();
     }
 
     void onClickReplay()
