@@ -11,7 +11,7 @@ public class Login : MonoBehaviour {
     public UIButton loginBtn;
     public UIButton registerBtn;
 
-    void Start ()
+    void Start()
     {
         UIHelper.registEvent(gameObject, "btn_login", onLogin);
         UIHelper.registEvent(gameObject, "btn_regist", onRegister);

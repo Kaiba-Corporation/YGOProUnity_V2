@@ -16,7 +16,13 @@ public class TDOANE : MonoBehaviour {
     public int GamePort;
     public string UpdatesDirectory = "http://ygopro.org/updates_2/";
 
+    public string UserID;
     public string Username;
+    public string Rank;
+    public string Team;
+    public string Wp;
+    public bool AvatarItem = false;
+    public bool CardBackItem = false;
 
     public List<string> BotDecks = new List<string>() { "Altergeist", "Blackwing", "Blue-Eyes", "BlueEyesMaxDragon", "Burn", "ChainBurn", "CyberDragon", "DarkMagician", "Dragunity",
         "Evilswarm", "Frog", "Gravekeeper", "Graydle", "GrenMajuThunderBoarder", "Horus", "Level8", "Lightsworn", "LightswornShaddoldinosour", "MokeyMokey", "MokeyMokeyKing", "Nekroz",
@@ -34,6 +40,7 @@ public class TDOANE : MonoBehaviour {
     public GameObject updateBoxForm;
     public GameObject hostCustomForm;
     public GameObject duelAiForm;
+    public GameObject profileForm;
 
     public NetworkClient client = new NetworkClient();
 
@@ -134,6 +141,20 @@ public class TDOANE : MonoBehaviour {
             duelAiForm = Instantiate(Resources.Load("mod_duel_ai")) as GameObject;
 
         duelAiForm.SetActive(true);
+    }
+
+    public void RequestProfile()
+    {
+        Program.I().tdoane.client.Send("RequestMyProfile<{]>" + Username);
+    }
+
+    public void ShowProfileForm(string[] message)
+    {
+        if (profileForm == null)
+            profileForm = Instantiate(Resources.Load("mod_profile")) as GameObject;
+
+        profileForm.SetActive(true);
+        profileForm.GetComponent<Profile>().Load(message);
     }
 
     public void DownloadUpdates(int myVersion, int requiredVersion)

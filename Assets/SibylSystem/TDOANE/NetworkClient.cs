@@ -94,13 +94,29 @@ public class NetworkClient : MonoBehaviour {
             else if (messageArray[0] == "NewSession") OnNewSession(messageArray);
             else if (messageArray[0] == "StartBotDuel") OnStartBotDuel(messageArray);
             else if (messageArray[0] == "Rooms") OnRooms(messageArray);
+            else if (messageArray[0] == "RequestMyProfile") OnRequestMyProfile(messageArray);
         }
     }
 
     private void OnLogin(string[] message)
     {
         Program.I().tdoane.Username = message[1];
+        Program.I().tdoane.UserID = message[78];
+        Program.I().tdoane.Rank = message[2];
+
+        if (message[4] == "")
+            Program.I().tdoane.Team = "No Team";
+        else
+            Program.I().tdoane.Team = message[4];
+
+        Program.I().tdoane.Wp = message[3];
         Program.I().tdoane.loginForm.SetActive(false);
+
+        if (message[59] == "1")
+            Program.I().tdoane.AvatarItem = true;
+        if (message[60] == "1")
+            Program.I().tdoane.CardBackItem = true;
+
         Program.I().initializeMenu();
     }
 
@@ -149,5 +165,10 @@ public class NetworkClient : MonoBehaviour {
     {
         string[] rooms = Regex.Split(message[1], ";");
         Program.I().tdoane.gameListForm.GetComponent<GameList>().UpdateRoomList(rooms);
+    }
+
+    private void OnRequestMyProfile(string[] message)
+    {
+        Program.I().tdoane.ShowProfileForm(message);
     }
 }
