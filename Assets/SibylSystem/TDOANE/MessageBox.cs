@@ -19,13 +19,15 @@ public class MessageBox : MonoBehaviour {
     {
         if (nextForm == "Login")
             Program.I().tdoane.loginForm.SetActive(true);
-        if (nextForm == "Register")
+        else if (nextForm == "Register")
             Program.I().tdoane.registerForm.SetActive(true);
-        if (nextForm == "Host Custom")
+        else if (nextForm == "Host Custom")
             Program.I().tdoane.hostCustomForm.SetActive(true);
-        if (nextForm == "Store")
+        else if (nextForm == "Profile")
+            Program.I().tdoane.profileForm.SetActive(true);
+        else if (nextForm == "Store")
             Program.I().tdoane.ShowStoreForm();
-        if (nextForm == "Close")
+        else if (nextForm == "Close")
             Program.I().quit();
 
         Destroy(gameObject);
