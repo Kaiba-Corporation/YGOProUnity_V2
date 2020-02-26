@@ -44,24 +44,44 @@ public class DuelAI : MonoBehaviour {
     private void OnDuel()
     {
         TextInfo mTextInfo = new CultureInfo("en-US", false).TextInfo;
-        string deck = mTextInfo.ToTitleCase(selectedDeckCmb.value);
+        string deck = mTextInfo.ToTitleCase(selectedDeckCmb.value.ToLower());
 
         if (deck == "Chain Burn" || deck == "Cyber Dragon" || deck == "Dark Magician" || deck == "Gren Maju Thunder Boarder" || deck == "Mokey Mokey"
             || deck == "Mokey Mokey King" || deck == "Sky Striker" || deck == "Toadally Awesome" || deck == "Zexal Weapons")
         {
             deck = deck.Replace(" ", "");
         }
-        else if (selectedDeckCmb.value == "Blue-Eyes White Dragon")
+        else if (deck == "Blue-Eyes White Dragon")
             deck = "Blue-Eyes";
-        else if (selectedDeckCmb.value == "Blue-Eyes Max Dragon")
+        else if (deck == "Blue-Eyes Max Dragon")
             deck = "BlueEyesMaxDragon";
-        else if (selectedDeckCmb.value == "Level VIII")
+        else if (deck == "Level VIII")
             deck = "Level8";
-        else if (selectedDeckCmb.value == "Rank V")
+        else if (deck == "Rank V")
             deck = "Rank5";
-        else if (selectedDeckCmb.value == "Shaddoll Dinosaur")
+        else if (deck == "Shaddoll Dinosaur")
             deck = "LightswornShaddoldinosour";
-
+        else if (deck == "Yugi Muto Deck")
+        {
+            Program.I().tdoane.client.Send("J.A.R.V.I.S.<{]>Yugi" + Random.Range(1, 6));
+            return;
+        }
+        else if (deck == "Seto Kaiba Deck")
+        {
+            Program.I().tdoane.client.Send("J.A.R.V.I.S.<{]>Kaiba" + Random.Range(1, 9));
+            return;
+        }
+        else if (deck == "Joey Wheeler Deck")
+        {
+            Program.I().tdoane.client.Send("J.A.R.V.I.S.<{]>Joey");
+            return;
+        }
+        else if (deck == "Dartz Deck")
+        {
+            Program.I().tdoane.client.Send("J.A.R.V.I.S.<{]>Dartz");
+            return;
+        }
+        
         Program.I().tdoane.client.Send("DuelingRobot<{]>" + deck);
     }
 
