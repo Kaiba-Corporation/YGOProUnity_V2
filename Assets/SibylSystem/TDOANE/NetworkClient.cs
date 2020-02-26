@@ -93,8 +93,10 @@ public class NetworkClient : MonoBehaviour {
             else if (messageArray[0] == "RegisterFail") OnRegisterFail(messageArray);
             else if (messageArray[0] == "NewSession") OnNewSession(messageArray);
             else if (messageArray[0] == "StartBotDuel") OnStartBotDuel(messageArray);
+            else if (messageArray[0] == "J.A.R.V.I.S.") OnJarvis(messageArray);
             else if (messageArray[0] == "Rooms") OnRooms(messageArray);
             else if (messageArray[0] == "RequestMyProfile") OnRequestMyProfile(messageArray);
+            else if (messageArray[0] == "CardBackURL") OnCardBackUrl(messageArray);
         }
     }
 
@@ -161,6 +163,15 @@ public class NetworkClient : MonoBehaviour {
         Program.I().selectServer.joinGame(Program.I().tdoane.Username, Program.I().tdoane.IP, port, "0");
     }
 
+    private void OnJarvis(string[] message)
+    {
+        string gameName = "030" + message[1];
+
+        Program.I().tdoane.isBotDuel = true;
+        Program.I().tdoane.duelAiForm.SetActive(false);
+        Program.I().selectServer.joinGame(Program.I().tdoane.Username, Program.I().tdoane.IP, Program.I().tdoane.GamePort.ToString(), gameName);
+    }
+
     private void OnRooms(string[] message)
     {
         string[] rooms = Regex.Split(message[1], ";");
@@ -170,5 +181,11 @@ public class NetworkClient : MonoBehaviour {
     private void OnRequestMyProfile(string[] message)
     {
         Program.I().tdoane.ShowProfileForm(message);
+    }
+
+    private void OnCardBackUrl(string[] message)
+    {
+        if (Program.I().tdoane.CardBackItem)
+            try { Program.I().tdoane.profileForm.GetComponent<Profile>().SetCardBack(message[1]); } catch { }
     }
 }
