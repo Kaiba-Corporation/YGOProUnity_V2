@@ -244,21 +244,21 @@ public class Profile : MonoBehaviour {
         }
         else
         {
-            Program.I().tdoane.CreateMessageBox("Item Not Owned!", "In order to change the avatar you need to purchase the 'Change Avatar Item'. This item can be purchased using diamonds. Diamonds are obtained by donating!", "Store");
+            Program.I().tdoane.CreateMessageBox("ITEM NOT OWNED", "In order to change the avatar you need to purchase the 'Change Avatar Item'. This item can be purchased using diamonds. Diamonds are obtained by donating!", "Store");
             Program.I().tdoane.profileForm.SetActive(false);
         }
     }
 
     void OnChangeCardBack()
     {
-        if (Program.I().tdoane.AvatarItem)
+        if (Program.I().tdoane.CardBackItem)
         {
             Program.I().tdoane.ShowUpdateImageForm(0);
             Program.I().tdoane.profileForm.SetActive(false);
         }
         else
         {
-            Program.I().tdoane.CreateMessageBox("Item Not Owned!", "In order to change the card back you need to purchase the 'Change Card Back Item'. This item can be purchased using diamonds. Diamonds are obtained by donating!", "Store");
+            Program.I().tdoane.CreateMessageBox("ITEM NOT OWNED", "In order to change the card back you need to purchase the 'Change Card Back Item'. This item can be purchased using diamonds. Diamonds are obtained by donating!", "Store");
             Program.I().tdoane.profileForm.SetActive(false);
         }
     }

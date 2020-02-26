@@ -645,7 +645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd1e2e844ad7a8948b2a1925d16aa3d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: {fileID: 114549952921725778}
+  titleLbl: {fileID: 114549952921725778}
   linkTxt: {fileID: 114526840828594962}
   updateBtn: {fileID: 114116266312154050}
   backBtn: {fileID: 114976991089491440}
