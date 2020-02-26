@@ -326,9 +326,9 @@ public class GameList : MonoBehaviour {
         }
 
         if (room.Substring(2, 1) == "0")
-            return new Color(0f, 0.71f, 0.027f);
+            return new Color(0f, 0.67f, 0.024f);
         else if (room.Substring(2, 1) == "1")
-            return new Color(0f, 0.027f, 0.71f);
+            return new Color(0f, 0.024f, 0.67f);
         else
             return new Color(0.749f, 0.486f, 0f);
     }
