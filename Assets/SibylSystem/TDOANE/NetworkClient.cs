@@ -96,7 +96,11 @@ public class NetworkClient : MonoBehaviour {
             else if (messageArray[0] == "J.A.R.V.I.S.") OnJarvis(messageArray);
             else if (messageArray[0] == "Rooms") OnRooms(messageArray);
             else if (messageArray[0] == "RequestMyProfile") OnRequestMyProfile(messageArray);
+            else if (messageArray[0] == "RequestDiamonds") OnRequestDiamonds(messageArray);
             else if (messageArray[0] == "CardBackURL") OnCardBackUrl(messageArray);
+            else if (messageArray[0] == "Avatar") OnBuyAvatar(messageArray);
+            else if (messageArray[0] == "CardBack") OnBuyCardBack(messageArray);
+            else if (messageArray[0] == "NotEnoughDiamonds") OnNotEnoughDiamonds(messageArray);
         }
     }
 
@@ -183,9 +187,31 @@ public class NetworkClient : MonoBehaviour {
         Program.I().tdoane.ShowProfileForm(message);
     }
 
+    private void OnRequestDiamonds(string[] message)
+    {
+        Program.I().tdoane.storeForm.GetComponent<Store>().SetDiamonds(message[1]);
+    }
+
     private void OnCardBackUrl(string[] message)
     {
         if (Program.I().tdoane.CardBackItem)
             try { Program.I().tdoane.profileForm.GetComponent<Profile>().SetCardBack(message[1]); } catch { }
+    }
+
+    private void OnBuyAvatar(string[] message)
+    {
+        Program.I().tdoane.AvatarItem = true;
+        Program.I().tdoane.CreateMessageBox("AVATAR PURCHASED", "Congratulations on purchasing the Avatar item, you may now set a custom Avatar!", "Profile");
+    }
+
+    private void OnBuyCardBack(string[] message)
+    {
+        Program.I().tdoane.CardBackItem = true;
+        Program.I().tdoane.CreateMessageBox("CARD BACK PURCHASED", "Congratulations on purchasing the Card Back item, you may now set a custom card back!", "Profile");
+    }
+
+    private void OnNotEnoughDiamonds(string[] message)
+    {
+        Program.I().tdoane.CreateMessageBox("NOT ENOUGH DIAMONDS", "You don't have enough diamonds to purchase this item right now. You can get more diamonds by donating!", "Store");
     }
 }

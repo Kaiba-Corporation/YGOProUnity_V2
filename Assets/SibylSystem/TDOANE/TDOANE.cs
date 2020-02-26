@@ -130,7 +130,7 @@ public class TDOANE : MonoBehaviour {
 
     public void ShowGameListForm()
     {
-        Program.I().tdoane.client.Send("GetRooms<{]>0");
+        client.Send("GetRooms<{]>0");
         if (gameListForm == null)
             gameListForm = Instantiate(Resources.Load("mod_room_list")) as GameObject;
 
@@ -147,7 +147,7 @@ public class TDOANE : MonoBehaviour {
 
     public void RequestProfile()
     {
-        Program.I().tdoane.client.Send("RequestMyProfile<{]>" + Username);
+        client.Send("RequestMyProfile<{]>" + Username);
     }
 
     public void ShowProfileForm(string[] message)
@@ -173,7 +173,9 @@ public class TDOANE : MonoBehaviour {
         if (storeForm == null)
             storeForm = Instantiate(Resources.Load("mod_store")) as GameObject;
 
+        storeForm.GetComponent<Store>().LoadStore();
         storeForm.SetActive(true);
+        client.Send("RequestDiamonds<{]>" + Username);
     }
 
     public void DownloadUpdates(int myVersion, int requiredVersion)
