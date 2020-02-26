@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class UpdateImage : MonoBehaviour {
 
-    public UILabel title;
+    public UILabel titleLbl;
     public UIInput linkTxt;
     public UIButton updateBtn;
     public UIButton backBtn;
 
     int type;
 
-    void Start () {
+    void Start ()
+    {
         UIHelper.registEvent(gameObject, "btn_update", OnUpdate);
         UIHelper.registEvent(gameObject, "btn_back", OnBack);
     }
@@ -22,9 +23,9 @@ public class UpdateImage : MonoBehaviour {
         linkTxt.value = "";
 
         if (type == 0)
-            title.text = "UPDATE CARD BACK";
+            titleLbl.text = "UPDATE CARD BACK";
         else if (type == 1)
-            title.text = "UPDATE AVATAR";
+            titleLbl.text = "UPDATE AVATAR";
     }
 
     private void OnUpdate()
