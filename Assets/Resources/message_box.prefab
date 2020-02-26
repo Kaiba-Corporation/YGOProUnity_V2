@@ -160,7 +160,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1680429674555954}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 166, z: 0}
+  m_LocalPosition: {x: 0, y: 163.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4827777465692888}
@@ -200,7 +200,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1999946593659326}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 41235, y: -54921, z: 0}
+  m_LocalPosition: {x: -621808, y: 139817, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4007708265553170}
@@ -246,8 +246,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 250, y: 50, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 452.90213, y: 50.000004, z: 1}
+  m_Center: {x: 0.5487597, y: 0, z: 0}
 --- !u!114 &114202224031018648
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -260,36 +260,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 4007708265553170}
+    target: {fileID: 0}
     relative: 0
-    absolute: 144
+    absolute: 210
   rightAnchor:
-    target: {fileID: 4007708265553170}
+    target: {fileID: 0}
     relative: 1
-    absolute: -144
+    absolute: -210
   bottomAnchor:
-    target: {fileID: 4007708265553170}
-    relative: 1
+    target: {fileID: 0}
+    relative: 0
     absolute: -57
   topAnchor:
-    target: {fileID: 4007708265553170}
+    target: {fileID: 0}
     relative: 1
     absolute: -25
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 512
+  mWidth: 380
   mHeight: 32
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 7
+  aspectRatio: 11.875
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: f775853fdfd14bb47934543e95c3bae3, type: 3}
   mFont: {fileID: 0}
   mText: 
-  mFontSize: 20
+  mFontSize: 30
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -500,7 +500,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 5
+  aspectRatio: 10.76
 --- !u!114 &114767001712408692
 MonoBehaviour:
   m_ObjectHideFlags: 1

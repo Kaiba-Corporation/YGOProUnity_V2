@@ -23,6 +23,8 @@ public class MessageBox : MonoBehaviour {
             Program.I().tdoane.registerForm.SetActive(true);
         if (nextForm == "Host Custom")
             Program.I().tdoane.hostCustomForm.SetActive(true);
+        if (nextForm == "Store")
+            Program.I().tdoane.ShowStoreForm();
         if (nextForm == "Close")
             Program.I().quit();
 

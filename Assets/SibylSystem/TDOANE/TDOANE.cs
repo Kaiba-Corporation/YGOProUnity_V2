@@ -41,6 +41,8 @@ public class TDOANE : MonoBehaviour {
     public GameObject hostCustomForm;
     public GameObject duelAiForm;
     public GameObject profileForm;
+    public GameObject updateImageForm;
+    public GameObject storeForm;
 
     public NetworkClient client = new NetworkClient();
 
@@ -155,6 +157,22 @@ public class TDOANE : MonoBehaviour {
 
         profileForm.SetActive(true);
         profileForm.GetComponent<Profile>().Load(message);
+    }
+
+    public void ShowUpdateImageForm(int type)
+    {
+        if (updateImageForm == null)
+            updateImageForm = Instantiate(Resources.Load("update_image_box")) as GameObject;
+
+        updateImageForm.SetActive(true);
+    }
+
+    public void ShowStoreForm()
+    {
+        if (storeForm == null)
+            storeForm = Instantiate(Resources.Load("mod_store")) as GameObject;
+
+        storeForm.SetActive(true);
     }
 
     public void DownloadUpdates(int myVersion, int requiredVersion)

@@ -38,6 +38,7 @@ public class Profile : MonoBehaviour {
     public UILabel tagLostLbl;
 
     string imageUrl;
+    string cardBackUrl;
 
     int position = 0;
 
@@ -93,15 +94,15 @@ public class Profile : MonoBehaviour {
         tagRankedWin = message[16];
         tagRankedDraw = message[17];
         tagRankedLost = message[18];
-        
+
         singleUnrankedWin = message[28];
         singleUnrankedDraw = message[29];
         singleUnrankedLost = message[30];
-        
+
         matchUnrankedWin = message[34];
         matchUnrankedDraw = message[35];
         matchUnrankedLost = message[36];
-        
+
         tagUnrankedWin = message[31];
         tagUnrankedDraw = message[32];
         tagUnrankedLost = message[33];
@@ -112,22 +113,47 @@ public class Profile : MonoBehaviour {
 
     void LoadImages()
     {
-        if (Program.I().tdoane.AvatarItem)
-        {
-            if (imageUrl != "")
-            {
-                StartCoroutine(DownloadAvatar());
-            }
-        }
+        if (Program.I().tdoane.AvatarItem && imageUrl != "")
+            StartCoroutine(DownloadAvatar());
+
+        SetLocalCardBackImage();
     }
 
     IEnumerator DownloadAvatar()
     {
-        WWW www = new WWW(@"http://ygopro.org/textures.php?type=1&link=" + imageUrl);
-        yield return www;
-        Texture2D avatarTexture = new Texture2D(www.texture.width, www.texture.height);
-        www.LoadImageIntoTexture(avatarTexture);
-        avatar.mainTexture = avatarTexture;
+        try
+        {
+            WWW www = new WWW(@"http://ygopro.org/textures.php?type=1&link=" + imageUrl);
+            yield return www;
+            Texture2D avatarTexture = new Texture2D(www.texture.width, www.texture.height);
+            www.LoadImageIntoTexture(avatarTexture);
+            avatar.mainTexture = avatarTexture;
+        }
+        finally { }
+    }
+
+    void SetLocalCardBackImage()
+    {
+        cardBack.mainTexture = GameTextureManager.myBack;
+    }
+
+    public void SetCardBack(string link)
+    {
+        cardBackUrl = link;
+        StartCoroutine(DownloadCardBack());
+    }
+
+    IEnumerator DownloadCardBack()
+    {
+        try
+        {
+            WWW www = new WWW(@"http://ygopro.org/textures.php?type=0&link=" + cardBackUrl);
+            yield return www;
+            Texture2D cardBackTexture = new Texture2D(www.texture.width, www.texture.height);
+            www.LoadImageIntoTexture(cardBackTexture);
+            cardBack.mainTexture = cardBackTexture;
+        }
+        finally { }
     }
 
     void UpdateStatistics()
@@ -206,12 +232,30 @@ public class Profile : MonoBehaviour {
 
     void OnChangeAvatar()
     {
-
+        if (Program.I().tdoane.AvatarItem)
+        {
+            Program.I().tdoane.ShowUpdateImageForm(1);
+            Program.I().tdoane.profileForm.SetActive(false);
+        }
+        else
+        {
+            Program.I().tdoane.CreateMessageBox("Item Not Owned!", "In order to change the avatar you need to purchase the 'Change Avatar Item'. This item can be purchased using diamonds. Diamonds are obtained by donating!", "Store");
+            Program.I().tdoane.profileForm.SetActive(false);
+        }
     }
 
     void OnChangeCardBack()
     {
-
+        if (Program.I().tdoane.AvatarItem)
+        {
+            Program.I().tdoane.ShowUpdateImageForm(0);
+            Program.I().tdoane.profileForm.SetActive(false);
+        }
+        else
+        {
+            Program.I().tdoane.CreateMessageBox("Item Not Owned!", "In order to change the card back you need to purchase the 'Change Card Back Item'. This item can be purchased using diamonds. Diamonds are obtained by donating!", "Store");
+            Program.I().tdoane.profileForm.SetActive(false);
+        }
     }
 
     void OnOk()
