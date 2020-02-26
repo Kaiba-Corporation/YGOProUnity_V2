@@ -107,16 +107,21 @@ public class Profile : MonoBehaviour {
         tagUnrankedDraw = message[32];
         tagUnrankedLost = message[33];
 
-        LoadImages();
+        LoadAvatar();
+        SetLocalCardBackImage();
         UpdateStatistics();
     }
 
-    void LoadImages()
+    public void LoadAvatar()
     {
         if (Program.I().tdoane.AvatarItem && imageUrl != "")
             StartCoroutine(DownloadAvatar());
+    }
 
-        SetLocalCardBackImage();
+    public void LoadAvatar(string url)
+    {
+        imageUrl = url;
+        LoadAvatar();
     }
 
     IEnumerator DownloadAvatar()

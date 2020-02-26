@@ -165,6 +165,7 @@ public class TDOANE : MonoBehaviour {
             updateImageForm = Instantiate(Resources.Load("update_image_box")) as GameObject;
 
         updateImageForm.SetActive(true);
+        updateImageForm.GetComponent<UpdateImage>().SetType(type);
     }
 
     public void ShowStoreForm()
