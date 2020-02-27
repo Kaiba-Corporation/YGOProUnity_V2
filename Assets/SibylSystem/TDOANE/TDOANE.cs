@@ -43,6 +43,7 @@ public class TDOANE : MonoBehaviour {
     public GameObject profileForm;
     public GameObject updateImageForm;
     public GameObject storeForm;
+    public GameObject donateForm;
 
     public NetworkClient client = new NetworkClient();
 
@@ -176,6 +177,14 @@ public class TDOANE : MonoBehaviour {
         storeForm.GetComponent<Store>().LoadStore();
         storeForm.SetActive(true);
         client.Send("RequestDiamonds<{]>" + Username);
+    }
+
+    public void ShowDonate()
+    {
+        if (donateForm == null)
+            donateForm = Instantiate(Resources.Load("mod_donate")) as GameObject;
+
+        donateForm.SetActive(true);
     }
 
     public void DownloadUpdates(int myVersion, int requiredVersion)

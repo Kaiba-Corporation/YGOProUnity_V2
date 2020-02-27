@@ -144,6 +144,7 @@ public class Store : MonoBehaviour {
 
     void OnDonate()
     {
-        
+        Program.I().tdoane.storeForm.SetActive(false);
+        Program.I().tdoane.ShowDonate();
     }
 }
