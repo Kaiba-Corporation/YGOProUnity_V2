@@ -139,6 +139,7 @@ public class Program : MonoBehaviour
     public BGMController bgm;
 
     public TDOANE tdoane;
+    public string startParameter = "";
     #endregion
 
     #region Initializement
@@ -277,12 +278,7 @@ public class Program : MonoBehaviour
 
     void initialize()
     {
-#if UNITY_EDITOR || UNITY_STANDALONE_WIN //编译器、Windows
-        //Environment.CurrentDirectory = System.Windows.Forms.Application.StartupPath;
-        //System.IO.Directory.SetCurrentDirectory(System.Windows.Forms.Application.StartupPath);
-        string sdcardpath = " /storage/emulated/0/Android/data/<packagename>/files";
-        sdcardpath = sdcardpath.Substring(0, sdcardpath.LastIndexOf("Android"));
-#elif UNITY_ANDROID //Android
+#if UNITY_ANDROID //Android
         //保持唤醒
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         //创建资源目录
@@ -900,9 +896,12 @@ public class Program : MonoBehaviour
         {
             backGroundPic.hide();
         }
-        if (to != menu && menu.isShowed)
+        if (menu != null)
         {
-            menu.hide();
+            if (to != menu && menu.isShowed)
+            {
+                menu.hide();
+            }
         }
         if (to != setting && setting.isShowed)
         {
@@ -947,7 +946,8 @@ public class Program : MonoBehaviour
         }
 
         if (to == backGroundPic && backGroundPic.isShowed == false) backGroundPic.show();
-        if (to == menu && menu.isShowed == false) menu.show();
+        if (menu != null) { if (to == menu && menu.isShowed == false) menu.show(); }
+        else if ((to == menu || to == selectServer) && startParameter != "") { quit(); Application.Quit(); }
         if (to == setting && setting.isShowed == false) setting.show();
         if (to == selectDeck && selectDeck.isShowed == false) selectDeck.show();
         if (to == room && room.isShowed == false) room.show();
@@ -958,8 +958,11 @@ public class Program : MonoBehaviour
         if (to == aiRoom && aiRoom.isShowed == false) aiRoom.show();
         if (to == roomList && !roomList.isShowed) roomList.show();
 
-        if (to == selectServer && selectServer.isShowed == false)
-            menu.show();
+        if (menu != null)
+        {
+            if (to == selectServer && selectServer.isShowed == false)
+                menu.show();
+        }
     }
 
     #endregion
@@ -975,6 +978,10 @@ public class Program : MonoBehaviour
         }
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 144;
+
+        string[] parameters = Environment.GetCommandLineArgs();
+        if (parameters.Length >= 2)
+            startParameter = parameters[1];
 #elif UNITY_ANDROID || UNITY_IOS //Android、iPhone
         //Screen.SetResolution(1280, 720, true);
         Application.targetFrameRate = 60;
@@ -1088,17 +1095,58 @@ public class Program : MonoBehaviour
 
     void gameStart()
     {
-        tdoane = new TDOANE();
-
         backGroundPic.show();
         bgm = gameObject.AddComponent<BGMController>();
 
-        tdoane.loginForm = Instantiate(Resources.Load("mod_login")) as GameObject;
-
-        if (PlayerPrefs.GetInt("Remember_Info") == 1)
+        if (startParameter == "")
         {
-            tdoane.loginForm.GetComponent<Login>().usernameTxt.value = PlayerPrefs.GetString("Saved_Username");
-            tdoane.loginForm.GetComponent<Login>().passwordTxt.value = PlayerPrefs.GetString("Saved_Password");
+            tdoane = new TDOANE();
+            tdoane.loginForm = NGUITools.AddChild(gameObject, Resources.Load("mod_login") as GameObject);
+
+            if (PlayerPrefs.GetInt("Remember_Info") == 1)
+            {
+                tdoane.loginForm.GetComponent<Login>().usernameTxt.value = PlayerPrefs.GetString("Saved_Username");
+                tdoane.loginForm.GetComponent<Login>().passwordTxt.value = PlayerPrefs.GetString("Saved_Password");
+            }
+        }
+        else if (startParameter == "-d")
+        {
+            shiftToServant(selectDeck);
+            selectDeck.show();
+        }
+        else if (startParameter == "-j")
+        {
+            string username = "";
+            string ip = "";
+            string port = "";
+            string gameName = "";
+
+            string line;
+            StreamReader file = new StreamReader("system.CONF");
+            while ((line = file.ReadLine()) != null)
+            {
+                if (line.Contains("nickname"))
+                    username = line.Replace("nickname = ", "");
+                else if (line.Contains("lastip"))
+                    ip = line.Replace("lastip = ", "");
+                else if (line.Contains("serverport"))
+                    port = line.Replace("serverport = ", "");
+                else if (line.Contains("roompass"))
+                    gameName = line.Replace("roompass = ", "");
+            }
+            file.Close();
+
+            selectServer.joinGame(username, ip, port, gameName);
+        }
+        else if (startParameter == "-r")
+        {
+            shiftToServant(selectReplay);
+            selectReplay.show();
+        }
+        else if (startParameter == "-o")
+        {
+            shiftToServant(setting);
+            setting.show();
         }
     }
 
@@ -1110,7 +1158,9 @@ public class Program : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        tdoane.client.Disconnect();
+        if (startParameter == "")
+            tdoane.client.Disconnect();
+
         TcpHelper.SaveRecord();
         cardDescription.save();
         setting.saveWhenQuit();
