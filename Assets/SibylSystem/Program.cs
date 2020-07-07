@@ -1,4 +1,4 @@
-﻿using ICSharpCode.SharpZipLib.Core;
+using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
 using System;
 using System.Collections.Generic;
@@ -1101,13 +1101,16 @@ public class Program : MonoBehaviour
         if (startParameter == "")
         {
             tdoane = new TDOANE();
-            tdoane.loginForm = NGUITools.AddChild(gameObject, Resources.Load("mod_login") as GameObject);
+            tdoane.CreateMessageBox("LAUNCHER REQUIRED", "YGOPRO 2 must be opened through the Launcher!", "Close");
 
-            if (PlayerPrefs.GetInt("Remember_Info") == 1)
-            {
-                tdoane.loginForm.GetComponent<Login>().usernameTxt.value = PlayerPrefs.GetString("Saved_Username");
-                tdoane.loginForm.GetComponent<Login>().passwordTxt.value = PlayerPrefs.GetString("Saved_Password");
-            }
+            //tdoane = new TDOANE();
+            //tdoane.loginForm = NGUITools.AddChild(gameObject, Resources.Load("mod_login") as GameObject);
+
+            //if (PlayerPrefs.GetInt("Remember_Info") == 1)
+            //{
+            //    tdoane.loginForm.GetComponent<Login>().usernameTxt.value = PlayerPrefs.GetString("Saved_Username");
+            //    tdoane.loginForm.GetComponent<Login>().passwordTxt.value = PlayerPrefs.GetString("Saved_Password");
+            //}
         }
         else if (startParameter == "-d")
         {
