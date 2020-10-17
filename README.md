@@ -30,7 +30,7 @@ We use Yu-Gi-Oh card game only to test our engine, and the game is not for comme
 
 Ubuntu
 `
-apt intsall libgdiplus
+apt install libgdiplus
 `
 
 Mac OSX
