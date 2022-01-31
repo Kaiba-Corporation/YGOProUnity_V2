@@ -45,6 +45,7 @@ public class DuelAI : MonoBehaviour {
     {
         TextInfo mTextInfo = new CultureInfo("en-US", false).TextInfo;
         string deck = mTextInfo.ToTitleCase(selectedDeckCmb.value.ToLower());
+        string masterRules = "5";
 
         if (deck == "Chain Burn" || deck == "Cyber Dragon" || deck == "Dark Magician" || deck == "Gren Maju Thunder Boarder" || deck == "Mokey Mokey"
             || deck == "Mokey Mokey King" || deck == "Sky Striker" || deck == "Toadally Awesome" || deck == "Zexal Weapons")
@@ -82,7 +83,7 @@ public class DuelAI : MonoBehaviour {
             return;
         }
         
-        Program.I().tdoane.client.Send("DuelingRobot<{]>" + deck);
+        Program.I().tdoane.client.Send("DuelingRobot<{]>" + deck + "<{]>" + masterRules + "<{]>0<{]>8000<{]>5<{]>1<{]>3<{]>false");
     }
 
     private void OnBack()

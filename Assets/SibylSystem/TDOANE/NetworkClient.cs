@@ -169,7 +169,7 @@ public class NetworkClient : MonoBehaviour {
 
     private void OnJarvis(string[] message)
     {
-        string gameName = "030" + message[1];
+        string gameName = message[1];
 
         Program.I().tdoane.isBotDuel = true;
         Program.I().tdoane.duelAiForm.SetActive(false);

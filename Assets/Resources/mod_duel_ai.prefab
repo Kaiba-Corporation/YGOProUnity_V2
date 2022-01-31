@@ -736,7 +736,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1793329839473954}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -194804, y: 178029, z: 0}
+  m_LocalPosition: {x: -2368, y: -3719, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4864362184901022}
@@ -847,7 +847,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1989111967683432}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 295, z: 0}
+  m_LocalPosition: {x: 0, y: 296, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4575893514284196}
@@ -1847,7 +1847,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: c3558975a4513cc478bdd46a65ba302f, type: 3}
+  mTexture: {fileID: 2800000, guid: a658d2e157ca0754dba60194cb2b8673, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -1906,7 +1906,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: a584fe2ec6848034a860b9fb79f92ad8, type: 3}
+  mTexture: {fileID: 2800000, guid: 74e7160a41811ce499acc561a2e6a989, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -2758,7 +2758,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: 8dcb4c25d65d02e4cb8f0b00c15b9409, type: 3}
+  mTexture: {fileID: 2800000, guid: d6d98026037ac5340a2ad04f4bf720c4, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -2817,7 +2817,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: fd97d81b1778ad648902f09ce08a4c3d, type: 3}
+  mTexture: {fileID: 2800000, guid: 4c85df0e80b6b284f813a15824084978, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -2876,7 +2876,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: 009e43e5dea62cc4ea5f5e2de98d334e, type: 3}
+  mTexture: {fileID: 2800000, guid: 413fca5964004d946acf4cd2570aa8da, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -2989,7 +2989,7 @@ MonoBehaviour:
     mMethodName: function
     mParameters: []
     oneShot: 0
-  mSelectedItem: RULE 4 (LINKS)
+  mSelectedItem: RULE 5 (APRIL 2020)
   mPanel: {fileID: 0}
   mBackground: {fileID: 0}
   mHighlight: {fileID: 0}
@@ -3069,7 +3069,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: f775853fdfd14bb47934543e95c3bae3, type: 3}
   mFont: {fileID: 0}
-  mText: RULE 4 (LINKS)
+  mText: RULE 5 (APRIL 2020)
   mFontSize: 30
   mFontStyle: 0
   mAlignment: 0
@@ -3106,11 +3106,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06c137df348509043a4c8eb0e946c86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duelingRobot: {fileID: 2800000, guid: a584fe2ec6848034a860b9fb79f92ad8, type: 3}
-  yugiMuto: {fileID: 2800000, guid: c3558975a4513cc478bdd46a65ba302f, type: 3}
-  setoKaiba: {fileID: 2800000, guid: fd97d81b1778ad648902f09ce08a4c3d, type: 3}
-  joeyWheeler: {fileID: 2800000, guid: 8dcb4c25d65d02e4cb8f0b00c15b9409, type: 3}
-  dartz: {fileID: 2800000, guid: 009e43e5dea62cc4ea5f5e2de98d334e, type: 3}
+  duelingRobot: {fileID: 2800000, guid: 74e7160a41811ce499acc561a2e6a989, type: 3}
+  yugiMuto: {fileID: 2800000, guid: a658d2e157ca0754dba60194cb2b8673, type: 3}
+  setoKaiba: {fileID: 2800000, guid: 4c85df0e80b6b284f813a15824084978, type: 3}
+  joeyWheeler: {fileID: 2800000, guid: d6d98026037ac5340a2ad04f4bf720c4, type: 3}
+  dartz: {fileID: 2800000, guid: 413fca5964004d946acf4cd2570aa8da, type: 3}
   duelBtn: {fileID: 114751387946836052}
   backBtn: {fileID: 114975561577778020}
   selectedOpponentPic: {fileID: 114411849188139514}
