@@ -66,21 +66,21 @@ public class GameList : MonoBehaviour {
 
     private void OnSingle()
     {
-        string gameName = "0004051,8000," + Utils.GetRandomString(6);
+        string gameName = "0005051,8000," + Utils.GetRandomString(6);
         Program.I().tdoane.gameListForm.SetActive(false);
         Program.I().selectServer.joinGame(Program.I().tdoane.Username, Program.I().tdoane.IP, Program.I().tdoane.GamePort.ToString(), gameName);
     }
 
     private void OnMatch()
     {
-        string gameName = "0014051,8000," + Utils.GetRandomString(6);
+        string gameName = "0015051,8000," + Utils.GetRandomString(6);
         Program.I().tdoane.gameListForm.SetActive(false);
         Program.I().selectServer.joinGame(Program.I().tdoane.Username, Program.I().tdoane.IP, Program.I().tdoane.GamePort.ToString(), gameName);
     }
 
     private void OnTag()
     {
-        string gameName = "0024051,8000," + Utils.GetRandomString(6);
+        string gameName = "0025051,8000," + Utils.GetRandomString(6);
         Program.I().tdoane.gameListForm.SetActive(false);
         Program.I().selectServer.joinGame(Program.I().tdoane.Username, Program.I().tdoane.IP, Program.I().tdoane.GamePort.ToString(), gameName);
     }
