@@ -11,8 +11,7 @@ public class HostCustom : MonoBehaviour {
     public UIInput startingLpTxt;
     public UIInput startingHandTxt;
     public UIInput cardsPerDrawTxt;
-
-    public UIToggle dontRecoverTimeChk;
+    
     public UIToggle dontShuffleDeckChk;
     public UIToggle dontCheckDeckChk;
 
@@ -20,6 +19,7 @@ public class HostCustom : MonoBehaviour {
     public UIPopupList regionCmb;
     public UIPopupList duelModeCmb;
     public UIPopupList masterRulesCmb;
+    public UIPopupList turnTimerCmb;
 
     void Start () {
         UIHelper.registEvent(gameObject, "btn_host", OnHost);
@@ -77,7 +77,7 @@ public class HostCustom : MonoBehaviour {
         int duelSettings = 0;
         if (dontCheckDeckChk.value) duelSettings += 1;
         if (dontShuffleDeckChk.value) duelSettings += 2;
-        if (dontRecoverTimeChk.value) duelSettings += 4;
+        if (turnTimerCmb.value == "7 MINUTES") duelSettings += 4;
 
         gameName += duelSettings.ToString();
 
