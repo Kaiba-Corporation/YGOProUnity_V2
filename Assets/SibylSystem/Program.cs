@@ -1098,19 +1098,23 @@ public class Program : MonoBehaviour
         backGroundPic.show();
         bgm = gameObject.AddComponent<BGMController>();
 
-        if (startParameter == "")
+        if (startParameter == "" && !Application.isMobilePlatform)
         {
+
+#if UNITY_STANDALONE_WIN
             tdoane = new TDOANE();
             tdoane.CreateMessageBox("LAUNCHER REQUIRED", "YGOPRO 2 must be opened through the Launcher!", "Close");
+#else
+            tdoane = new TDOANE();
+            tdoane.loginForm = NGUITools.AddChild(gameObject, Resources.Load("mod_login") as GameObject);
 
-            //tdoane = new TDOANE();
-            //tdoane.loginForm = NGUITools.AddChild(gameObject, Resources.Load("mod_login") as GameObject);
+            if (PlayerPrefs.GetInt("Remember_Info") == 1)
+            {
+                tdoane.loginForm.GetComponent<Login>().usernameTxt.value = PlayerPrefs.GetString("Saved_Username");
+                tdoane.loginForm.GetComponent<Login>().passwordTxt.value = PlayerPrefs.GetString("Saved_Password");
+            }
+#endif
 
-            //if (PlayerPrefs.GetInt("Remember_Info") == 1)
-            //{
-            //    tdoane.loginForm.GetComponent<Login>().usernameTxt.value = PlayerPrefs.GetString("Saved_Username");
-            //    tdoane.loginForm.GetComponent<Login>().passwordTxt.value = PlayerPrefs.GetString("Saved_Password");
-            //}
         }
         else if (startParameter == "-d")
         {
@@ -1195,7 +1199,7 @@ public class Program : MonoBehaviour
         setting.saveWhenQuit();
     }
 
-    #endregion
+#endregion
 
     private static void DirPaths(string filefullpath)
     {
