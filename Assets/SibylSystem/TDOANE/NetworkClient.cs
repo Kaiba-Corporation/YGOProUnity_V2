@@ -108,6 +108,7 @@ public class NetworkClient : MonoBehaviour {
     {
         Program.I().tdoane.Username = message[1];
         Program.I().tdoane.UserID = message[78];
+        Program.I().tdoane.Token = message[79];
         Program.I().tdoane.Rank = message[2];
 
         if (message[4] == "")

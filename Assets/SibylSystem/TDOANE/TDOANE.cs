@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.Collections;
@@ -18,6 +18,7 @@ public class TDOANE : MonoBehaviour {
 
     public string UserID;
     public string Username;
+    public string Token;
     public string Rank;
     public string Team;
     public string Wp;
