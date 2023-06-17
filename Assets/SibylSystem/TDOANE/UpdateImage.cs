@@ -1,5 +1,8 @@
-﻿using System.Collections;
+﻿using System.Net;
+using System.Text;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using UnityEngine;
 
 public class UpdateImage : MonoBehaviour {
@@ -30,18 +33,31 @@ public class UpdateImage : MonoBehaviour {
 
     private void OnUpdate()
     {
-        Program.I().tdoane.profileForm.SetActive(true);
-        Program.I().tdoane.updateImageForm.SetActive(false);
+        UploadImage(Program.I().tdoane.Token, type, linkTxt.value);
+    }
 
-        if (type == 0)
+    private void UploadImage(string token, int type, string url)
+    {
+        using (var client = new WebClient())
         {
-            Program.I().tdoane.client.Send("UpdateCardBack<{]>" + linkTxt.value);
-            Program.I().tdoane.profileForm.GetComponent<Profile>().SetCardBack(linkTxt.value);
-        }
-        else if (type == 1)
-        {
-            Program.I().tdoane.client.Send("UpdateAvatar<{]>" + linkTxt.value);
-            Program.I().tdoane.profileForm.GetComponent<Profile>().LoadAvatar(linkTxt.value);
+            var values = new NameValueCollection();
+            values["token"] = Program.I().tdoane.Token;
+            values["fileType"] = type == 0 ? "sleeve" : "avatar";
+            values["img_url"] = url;
+
+            var response = client.UploadValues(@"http://ygopro.org/kaibapro/uploads/upload_from_link.php", values);
+
+            var responseString = Encoding.Default.GetString(response);
+            if (responseString.Contains("SUCCESS"))
+            {
+                Program.I().tdoane.updateImageForm.SetActive(false);
+                Program.I().tdoane.RequestProfile();
+            }
+            else
+            {
+                Program.I().tdoane.updateImageForm.SetActive(false);
+                Program.I().tdoane.CreateMessageBox("File Upload Error!", responseString, "Profile");
+            }
         }
     }
 
