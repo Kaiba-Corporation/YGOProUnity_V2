@@ -736,7 +736,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1793329839473954}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2368, y: -3719, z: 0}
+  m_LocalPosition: {x: 1292, y: 169, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4864362184901022}
@@ -1847,7 +1847,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: a658d2e157ca0754dba60194cb2b8673, type: 3}
+  mTexture: {fileID: 2800000, guid: 3880b1a01c4a5204bbc953ba8bad50f0, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -1906,7 +1906,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: 74e7160a41811ce499acc561a2e6a989, type: 3}
+  mTexture: {fileID: 2800000, guid: 12afb87119a221242b983a648660eadc, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -2758,7 +2758,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: d6d98026037ac5340a2ad04f4bf720c4, type: 3}
+  mTexture: {fileID: 2800000, guid: 44521d0bc0ea89247beba95638ed7281, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -2817,7 +2817,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: 4c85df0e80b6b284f813a15824084978, type: 3}
+  mTexture: {fileID: 2800000, guid: 6d2e59d6e1d8a944fa33ba8e1e15389b, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -2876,7 +2876,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: 413fca5964004d946acf4cd2570aa8da, type: 3}
+  mTexture: {fileID: 2800000, guid: 3103f33c9b1de414c9f2afd96feb6494, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -3106,11 +3106,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06c137df348509043a4c8eb0e946c86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duelingRobot: {fileID: 2800000, guid: 74e7160a41811ce499acc561a2e6a989, type: 3}
-  yugiMuto: {fileID: 2800000, guid: a658d2e157ca0754dba60194cb2b8673, type: 3}
-  setoKaiba: {fileID: 2800000, guid: 4c85df0e80b6b284f813a15824084978, type: 3}
-  joeyWheeler: {fileID: 2800000, guid: d6d98026037ac5340a2ad04f4bf720c4, type: 3}
-  dartz: {fileID: 2800000, guid: 413fca5964004d946acf4cd2570aa8da, type: 3}
+  duelingRobot: {fileID: 2800000, guid: 12afb87119a221242b983a648660eadc, type: 3}
+  yugiMuto: {fileID: 2800000, guid: 3880b1a01c4a5204bbc953ba8bad50f0, type: 3}
+  setoKaiba: {fileID: 2800000, guid: 6d2e59d6e1d8a944fa33ba8e1e15389b, type: 3}
+  joeyWheeler: {fileID: 2800000, guid: 44521d0bc0ea89247beba95638ed7281, type: 3}
+  dartz: {fileID: 2800000, guid: 3103f33c9b1de414c9f2afd96feb6494, type: 3}
   duelBtn: {fileID: 114751387946836052}
   backBtn: {fileID: 114975561577778020}
   selectedOpponentPic: {fileID: 114411849188139514}
