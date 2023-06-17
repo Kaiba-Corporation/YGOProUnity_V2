@@ -1,10 +1,29 @@
 fileFormatVersion: 2
 guid: 06c137df348509043a4c8eb0e946c86b
-timeCreated: 1580887361
+timeCreated: 1686975333
 licenseType: Pro
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - duelingRobot: {instanceID: 0}
+  - yugiMuto: {instanceID: 0}
+  - setoKaiba: {instanceID: 0}
+  - joeyWheeler: {instanceID: 0}
+  - dartz: {instanceID: 0}
+  - duelBtn: {instanceID: 0}
+  - backBtn: {instanceID: 0}
+  - selectedOpponentPic: {instanceID: 0}
+  - opponent1Pic: {instanceID: 0}
+  - opponent2Pic: {instanceID: 0}
+  - opponent3Pic: {instanceID: 0}
+  - opponent4Pic: {instanceID: 0}
+  - selectedOpponentLbl: {instanceID: 0}
+  - opponent1Lbl: {instanceID: 0}
+  - opponent2Lbl: {instanceID: 0}
+  - opponent3Lbl: {instanceID: 0}
+  - opponent4Lbl: {instanceID: 0}
+  - masterRulesCmb: {instanceID: 0}
+  - selectedDeckCmb: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
