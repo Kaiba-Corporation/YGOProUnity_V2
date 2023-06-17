@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Net;
 using System.Collections;
@@ -126,6 +126,9 @@ public class TDOANE : MonoBehaviour {
 
     public void ShowLoginForm()
     {
+        if (loginForm == null)
+            loginForm = Instantiate(Resources.Load("mod_login")) as GameObject;
+
         loginForm.SetActive(true);
     }
 
