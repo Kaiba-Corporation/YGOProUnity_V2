@@ -45,6 +45,7 @@ public class TDOANE : MonoBehaviour {
     public GameObject updateImageForm;
     public GameObject storeForm;
     public GameObject donateForm;
+    public GameObject deckSelectedForm;
 
     public NetworkClient client = new NetworkClient();
 
@@ -203,5 +204,14 @@ public class TDOANE : MonoBehaviour {
 
         updateBoxForm = (GameObject)Instantiate(Resources.Load("update_box"));
         updateBoxForm.GetComponent<Updater>().ExtractImages();
+    }
+
+    public void ShowPostDuelDeckMessage(string[] message)
+    {
+        if (deckSelectedForm == null)
+            deckSelectedForm = Instantiate(Resources.Load("mod_deck_selected")) as GameObject;
+
+        deckSelectedForm.SetActive(true);
+        deckSelectedForm.GetComponent<DeckSelected>().Load(message);
     }
 }

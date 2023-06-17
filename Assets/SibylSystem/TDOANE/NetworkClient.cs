@@ -101,6 +101,7 @@ public class NetworkClient : MonoBehaviour {
             else if (messageArray[0] == "Avatar") OnBuyAvatar(messageArray);
             else if (messageArray[0] == "CardBack") OnBuyCardBack(messageArray);
             else if (messageArray[0] == "NotEnoughDiamonds") OnNotEnoughDiamonds(messageArray);
+            else if (messageArray[0] == "PostDuelDeckMessage") OnPostDuelDeckMessage(messageArray);
         }
     }
 
@@ -214,5 +215,10 @@ public class NetworkClient : MonoBehaviour {
     private void OnNotEnoughDiamonds(string[] message)
     {
         Program.I().tdoane.CreateMessageBox("NOT ENOUGH DIAMONDS", "You don't have enough diamonds to purchase this item right now. You can get more diamonds by donating!", "Store");
+    }
+
+    private void OnPostDuelDeckMessage(string[] message)
+    {
+        Program.I().tdoane.ShowPostDuelDeckMessage(message);
     }
 }
