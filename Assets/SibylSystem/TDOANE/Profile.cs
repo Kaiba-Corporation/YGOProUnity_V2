@@ -128,11 +128,14 @@ public class Profile : MonoBehaviour {
     {
         try
         {
-            WWW www = new WWW(@"http://ygopro.org/textures.php?type=1&link=" + imageUrl);
+            WWW www = new WWW(@"http://ygopro.org/textures.php?link=" + imageUrl + "?v=" + Utils.GetRandomString(10));
             yield return www;
-            Texture2D avatarTexture = new Texture2D(www.texture.width, www.texture.height);
-            www.LoadImageIntoTexture(avatarTexture);
-            avatar.mainTexture = avatarTexture;
+            if (!string.IsNullOrEmpty(www.text))
+            {
+                Texture2D avatarTexture = new Texture2D(www.texture.width, www.texture.height);
+                www.LoadImageIntoTexture(avatarTexture);
+                avatar.mainTexture = avatarTexture;
+            }
         }
         finally { }
     }
@@ -152,11 +155,14 @@ public class Profile : MonoBehaviour {
     {
         try
         {
-            WWW www = new WWW(@"http://ygopro.org/textures.php?type=0&link=" + cardBackUrl);
+            WWW www = new WWW(@"http://ygopro.org/textures.php?link=" + cardBackUrl + "?v=" + Utils.GetRandomString(10));
             yield return www;
-            Texture2D cardBackTexture = new Texture2D(www.texture.width, www.texture.height);
-            www.LoadImageIntoTexture(cardBackTexture);
-            cardBack.mainTexture = cardBackTexture;
+            if (!string.IsNullOrEmpty(www.text))
+            {
+                Texture2D cardBackTexture = new Texture2D(www.texture.width, www.texture.height);
+                www.LoadImageIntoTexture(cardBackTexture);
+                cardBack.mainTexture = cardBackTexture;
+            }
         }
         finally { }
     }

@@ -196,7 +196,7 @@ public class Room : WindowServantSP
         try
         {
             System.Net.WebClient webClient = new System.Net.WebClient();
-            byte[] imageBytes = webClient.DownloadData(@"http://ygopro.org/textures.php?type=" + type.ToString() + "&link=" + url);
+            byte[] imageBytes = webClient.DownloadData(@"http://ygopro.org/textures.php?link=" + url + "?v=" + Utils.GetRandomString(10));
             var tex = new Texture2D(4, 4);
             tex.LoadImage(imageBytes);
 
