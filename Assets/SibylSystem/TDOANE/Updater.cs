@@ -117,7 +117,7 @@ public class Updater : MonoBehaviour {
         totalBytesToReceive = 0;
 
         filesExtracted = 0;
-        totalFilesToExtract = 19340;
+        totalFilesToExtract = 22847;
 
         Thread extractImageFiles = new Thread(ExtractImageFiles);
         extractImageFiles.Start();
@@ -127,7 +127,7 @@ public class Updater : MonoBehaviour {
     {
         int fileId = 0;
 
-        while (fileId <= 17)
+        while (fileId <= 19)
         {
             string filePath = Application.streamingAssetsPath + "/picture/picture_" + fileId.ToString() + ".zip";
 
@@ -140,7 +140,7 @@ public class Updater : MonoBehaviour {
             fileId++;
         }
 ;
-        File.WriteAllText("config/version.conf", "0");
+        File.WriteAllText("config/version.conf", "28");
         Program.I().tdoane.ImagesExtracted = true;
     }
 
